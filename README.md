@@ -1,1 +1,1 @@
-# Crypto-Paper-Trading
+# Mock Markets
