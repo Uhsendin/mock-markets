@@ -7,17 +7,22 @@
   line-height: 1.5;
   background-color: #292c2c;
   color: #ffffff;
+  font-family: 'Roboto', sans-serif;
 }
 
 nav {
-  font-size: 5rem;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 2rem;
+  justify-content: space-evenly;
+  padding: 2rem 8rem;
+}
+.right-nav, .left-nav {
+    display: flex;
+    gap: 8rem;
+    align-items: center;
 }
 nav h1 {
   color: #ee5246;
+  font-size: 4rem;
 }
 
 nav ul {
@@ -26,14 +31,22 @@ nav ul {
 }
 
 nav a {
-  font-size: 3rem;
+  font-size: 2.3rem;
   text-transform: capitalize;
   text-decoration: none;
 }
+
+nav a:hover,
+nav a:focus {
+    color: #ee5246;
+    cursor: pointer;
+}
+
 .search-bar input {
   border: 2.5px solid #ee5246;
   border-radius: 3px;
-  min-height: 30px
+  min-height: 30px;
+  font-size: 1rem;
 }
 
 .btn-container button {
@@ -42,6 +55,7 @@ nav a {
   border-radius: 18px;
   background-color: #ee5246;
   text-transform: uppercase;
+  font-size: 1.8rem;
 }
 .btn-container button:first-child {
   background-color: transparent;
