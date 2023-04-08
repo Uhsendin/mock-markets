@@ -1,0 +1,48 @@
+* {
+  font-size: 62.5%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  line-height: 1.5;
+  background-color: #292c2c;
+  color: #ffffff;
+}
+
+nav {
+  font-size: 5rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2rem;
+}
+nav h1 {
+  color: #ee5246;
+}
+
+nav ul {
+  display: flex;
+  gap: 2.5rem;
+}
+
+nav a {
+  font-size: 3rem;
+  text-transform: capitalize;
+  text-decoration: none;
+}
+.search-bar input {
+  border: 2.5px solid #ee5246;
+  border-radius: 3px;
+  min-height: 30px
+}
+
+.btn-container button {
+  border: none;
+  padding: 0.5rem 2.3rem;
+  border-radius: 18px;
+  background-color: #ee5246;
+  text-transform: uppercase;
+}
+.btn-container button:first-child {
+  background-color: transparent;
+}
