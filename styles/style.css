@@ -85,3 +85,10 @@ nav a:focus,
 nav i:focus {
   color: #ffffff;
 }
+
+.coins-list img {
+  width: 70px;
+}
+.coins-list {
+  font-size: 6rem;
+}
