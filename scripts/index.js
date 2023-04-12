@@ -11,11 +11,19 @@ class Coin {
     const coinElement = document.createElement("section");
     coinElement.classList.add("coin");
     coinElement.innerHTML = `
+    <section class="coin-name">
+    <div class="coin-img">
+    <img src="${this.img}" alt="${this.name}">
+    </div>
+    <div class="coin-info">
       <h2 class="name">${this.name}</h2>
       <p class="symbol">${this.symbol}</p>
-      <img src="${this.img}" alt="">
-      <p class="price">${this.price}</p>
-      <p class="price-24-high">${this.price24High}</p>
+      <div>
+      </section>
+      <section class="coin-price">
+      <p class="price">$${this.price.toFixed(2)}</p>
+      <p class="price-24-high ${this.price24High >= 0 ? 'positive' : 'negative'}">${this.price24High.toFixed(2)}</p>
+      </section>
     `;
     return coinElement;
   }
@@ -33,7 +41,7 @@ class CoinList {
   }
 
   render() {
-    this.coinsListElement.innerHTML = "";
+    this.coinsListElement.innerHTML = `<h2 class="prices">Prices</h2>`
     for (let i = 0; i < this.coins.length; i++) {
       const coinElement = this.coins[i].render();
       this.coinsListElement.appendChild(coinElement);
