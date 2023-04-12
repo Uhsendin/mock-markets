@@ -7,11 +7,15 @@ class Coin {
     this.price24High = price24High;
   }
 
+  renderThisCoin() {
+    
+  }
+
   render() {
     const coinElement = document.createElement("section");
     coinElement.classList.add("coin");
     coinElement.innerHTML = `
-    <section class="coin-name">
+    <section class="coin-name" id="">
     <div class="coin-img">
     <img src="${this.img}" alt="${this.name}">
     </div>
@@ -25,6 +29,9 @@ class Coin {
       <p class="price-24-high ${this.price24High >= 0 ? 'positive' : 'negative'}">${this.price24High.toFixed(2)}</p>
       </section>
     `;
+    coinElement.addEventListener("click", () =>  {
+      window.location.href = "/pages/crypto-details.html";
+    })
     return coinElement;
   }
 }
