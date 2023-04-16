@@ -1,0 +1,16 @@
+body {
+    font-size: 10rem;
+}
+
+
+.coin-current {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.coin-balance {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
