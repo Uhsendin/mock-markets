@@ -33,6 +33,19 @@ document.querySelector(".hamburger").addEventListener("click", function () {
 <p>$-1,304</p>
 </div>
 </div>
+<section class="about-coin">
+<p>About ${data.name}</p>
+<p>${data.description.en}</p>
+<button>View more</button>
+</section>
+<section class="coin-market-stats">
+<p>Popularity ${data.market_cap_rank}</p>
+<p> Market cap ${data.market_data.market_cap.usd}</p>
+<p>Volume ${data.market_data.total_volume.usd}</p>
+<p>Circulating supply ${data.market_data.circulating_supply}</p>
+
+
+</section>
 </section>
     `;
   });
