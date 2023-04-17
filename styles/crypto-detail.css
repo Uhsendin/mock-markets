@@ -2,9 +2,13 @@ body {
     font-size: 10rem;
 }
 
- h1 {
+ h1, .balance-title {
     font-size: 1.3rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.5);   
+}
+
+.balance-title {
+    margin-bottom: -5px;
 }
 
 main {
@@ -35,4 +39,32 @@ main {
 }
 .positive {
     color: green;
+}
+
+.your-balance {
+    border-bottom: 1px solid white;
+    border-top: 1px solid white;
+    padding: 20px 0;
+}
+.balance {
+    font-size: 4rem;
+}
+
+
+.coin-primary-balance img {
+    width: 30px;
+}
+.coin-primary-balance {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+.coin-text
+ {
+    font-size: 2rem;
+}
+
+.coin-shares p {
+    font-size: 1.5rem;
 }
