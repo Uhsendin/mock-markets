@@ -2,15 +2,37 @@ body {
     font-size: 10rem;
 }
 
+ h1 {
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+main {
+    padding: 0 30px;
+}
 
 .coin-current {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
+.coin-current p {
+    font-size: 4rem;
+}
+.coin-current button i {
+    font-size: 3rem;
+    color: yellow;
+}
 
 .coin-balance {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.negative {
+    color: rgb(249, 62, 62);
+}
+.positive {
+    color: green;
 }

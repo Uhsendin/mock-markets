@@ -14,10 +14,10 @@ document.querySelector(".hamburger").addEventListener("click", function () {
    <h1>${data.name} Price</h1>
    <section class="coin-header">
    <div class="coin-current">
-   <p>${data.market_data.current_price.usd}</p>
+   <p>$${data.market_data.current_price.usd.toLocaleString()}</p>
    <button><i class="fa-solid fa-star"></i></button>
    </div>
-   <p>$${data.market_data.price_change_24h.toFixed(2)} (${data.market_data.price_change_percentage_24h.toFixed(2)}%)</p>
+   <p class="${data.market_data.price_change_24h >= 0 ? "positive" : "negative"}">$${data.market_data.price_change_24h.toFixed(2)} (${data.market_data.price_change_percentage_24h.toFixed(2)}%)</p>
    </section>
 <section class="coin-graph"></section>
 <section class="coin-info">
@@ -39,10 +39,11 @@ document.querySelector(".hamburger").addEventListener("click", function () {
 <button>View more</button>
 </section>
 <section class="coin-market-stats">
+<h2>Market stats</h2>
 <p>Popularity ${data.market_cap_rank}</p>
-<p> Market cap ${data.market_data.market_cap.usd}</p>
-<p>Volume ${data.market_data.total_volume.usd}</p>
-<p>Circulating supply ${data.market_data.circulating_supply}</p>
+<p>Market cap ${data.market_data.market_cap.usd.toLocaleString()}</p>
+<p>Volume ${data.market_data.total_volume.usd.toLocaleString()}</p>
+<p>Circulating supply ${data.market_data.circulating_supply.toLocaleString()}</p>
 
 
 </section>
