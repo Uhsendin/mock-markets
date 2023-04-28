@@ -47,11 +47,10 @@ fetch(
 </div>
 
 
-
 <section class="about-coin">
 <p>About ${data.name}</p>
-<p>${data.description.en}</p>
-<button>View more</button>
+<p class="coin-des">${data.description.en}</p>
+<button class="view-more">View more</button>
 </section>
 <section class="coin-market-stats">
 <h2>Market stats</h2>
@@ -64,4 +63,17 @@ fetch(
 </section>
 </section>
     `;
+    const btnViewMore = document.querySelector(".view-more")
+    btnViewMore.addEventListener("click", function() {
+        const paragraph = document.querySelector(".coin-des")
+        paragraph.classList.toggle("expand");
+
+        if (btnViewMore.textContent === "View more") {
+          btnViewMore.textContent = "View less";
+        } else {
+          btnViewMore.textContent = "View more";
+        }
+      })
+
   });
+
