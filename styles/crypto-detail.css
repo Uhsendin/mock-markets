@@ -1,92 +1,101 @@
 body {
-    font-size: 10rem;
+  font-size: 10rem;
 }
 
- h1, .balance-title {
-    font-size: 1.3rem;
-    color: rgba(255, 255, 255, 0.5);   
+h1,
+.balance-title {
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .balance-title {
-    margin-bottom: -5px;
+  margin-bottom: -5px;
 }
 
 main {
-    padding: 0 30px;
+  padding: 0 30px;
 }
 
 .coin-current {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .coin-current p {
-    font-size: 4rem;
+  font-size: 4rem;
 }
 .coin-current button i {
-    font-size: 3rem;
-    color: yellow;
+  font-size: 3rem;
+  color: yellow;
 }
 
 .coin-balance {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .negative {
-    color: rgb(249, 62, 62);
+  color: rgb(249, 62, 62);
 }
 .positive {
-    color: green;
+  color: green;
 }
 
 .your-balance {
-    border-bottom: 1px solid white;
-    border-top: 1px solid white;
-    padding: 20px 0;
+  border-bottom: 1px solid white;
+  border-top: 1px solid white;
+  padding: 20px 0;
 }
 .balance {
-    font-size: 4rem;
+  font-size: 4rem;
 }
-
 
 .coin-primary-balance img {
-    width: 30px;
+  width: 30px;
 }
 .coin-primary-balance {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
 }
-.coin-text
- {
-    font-size: 2rem;
+.coin-text {
+  font-size: 2rem;
 }
 
 .coin-shares p {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .about-coin p:first-child {
-    padding-top: 20px;
-    font-size: 2rem;
-    font-weight: bold;
+  padding-top: 20px;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .coin-des {
-    max-height: 100px;
-    font-size: 1.5rem;
-    overflow: hidden;
-    line-height: 1.3;
+  max-height: 100px;
+  font-size: 1.5rem;
+  overflow: hidden;
+  line-height: 1.3;
+}
+.coin-des a {
+  font-size: inherit;
+  text-decoration: none;
+  color: #ee5246;
+}
+
+.coin-des a:hover,
+.coin-des a:focus {
+    color: #d4716a;
 }
 
 .coin-des.expand {
-    max-height: none;
-  }
+  max-height: none;
+}
 
-  .view-more {
-    color: #ee5246;
-    font-size: 1.5rem;
-  }
+.view-more {
+  color: #ee5246;
+  font-size: 1.5rem;
+}

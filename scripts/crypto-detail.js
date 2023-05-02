@@ -4,14 +4,17 @@ document.querySelector(".hamburger").addEventListener("click", function () {
 });
 
 function fetchDataAndRender() {
+  // Get coin name from URL parameters
   const urlParams = new URLSearchParams(window.location.search);
   const coinName = urlParams.get("coin");
 
+  // Fetch data from API
   fetch(
     `https://api.coingecko.com/api/v3/coins/${coinName}?localization=false&tickers=false&developer_data=false&sparkline=false`
   )
     .then((res) => res.json())
     .then((data) => {
+      // Render coin details on the page
       const coinDetailsElement = document.getElementById("coin-details");
       coinDetailsElement.innerHTML = `
       <h1>${data.name} Price</h1>
@@ -59,49 +62,35 @@ function fetchDataAndRender() {
         </section>
       </section>
       `;
-      const btnViewMore = document.querySelector(".view-more");
-      btnViewMore.addEventListener("click", function () {
-        const paragraph = document.querySelector(".coin-des");
-        paragraph.classList.toggle("expand");
 
-        if (btnViewMore.textContent === "View more") {
-          btnViewMore.textContent = "View less";
-        } else {
-          btnViewMore.textContent = "View more";
-        }
+      // Attach event listeners
+      const attachEventListeners = () => {
+        // Event listener for "View more" button
+        const btnViewMore = document.querySelector(".view-more");
+        btnViewMore.addEventListener("click", function () {
+          const paragraph = document.querySelector(".coin-des");
+          paragraph.classList.toggle("expand");
+
+          if (btnViewMore.textContent === "View more") {
+            btnViewMore.textContent = "View less";
+          } else {
+            btnViewMore.textContent = "View more";
+          }
+        });
+      };
+
+      // Make all links within .coin-des open in new tabs
+      const coinDesLinks = document.querySelectorAll(".coin-des a");
+      coinDesLinks.forEach((link) => {
+        link.setAttribute("target", "_blank");
       });
-
-    //   function renderWishlist(img,name,symbol,price,price24High,id) {
-    //     const coinElement = document.createElement("section");
-    //     coinElement.classList.add("coin");
-    //     coinElement.innerHTML = `
-    // <section class="coin-name">
-    // <div class="coin-img">
-    // <img src="${img}" alt="${name}">
-    // </div>
-    // <div class="coin-info">
-    //   <h2 class="name">${name}</h2>
-    //   <p class="symbol">${symbol}</p>
-    //   <div>
-    //   </section>
-    //   <section class="coin-price">
-    //   <p class="price">$${price.toFixed(2)}</p>
-    //   <p class="price-24-high ${
-    //     price24High >= 0 ? "positive" : "negative"
-    //   }">${price24High.toFixed(2)}%</p>
-    //   </section>
-    // `;
-    //     coinElement.addEventListener("click", () => {
-    //       window.location.href = `/pages/crypto-details.html?coin=${id}`;
-    //     });
-    //     return coinElement;
-    //   }
 
       const wishlistBtn = document.querySelector(".wishlist-btn");
 
       wishlistBtn.addEventListener("click", function () {
         localStorage.setItem(data.name, data.name);
       });
+      attachEventListeners();
     });
 }
 
