@@ -88,7 +88,12 @@ function fetchDataAndRender() {
       const wishlistBtn = document.querySelector(".wishlist-btn");
 
       wishlistBtn.addEventListener("click", function () {
-        localStorage.setItem("selectedCoin", data.name);
+      let selectedCryptos = localStorage.getItem("selectedCryptos")
+      selectedCryptos = selectedCryptos ? JSON.parse(selectedCryptos) : []
+
+      if (!selectedCryptos.includes(data.name))
+      selectedCryptos.push(data.name)
+      localStorage.setItem("selectedCryptos", JSON.stringify(selectedCryptos))
       });
       attachEventListeners();
     });
