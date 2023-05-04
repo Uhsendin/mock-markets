@@ -1,8 +1,3 @@
-// Toggles hamburger overlay
-document.querySelector(".hamburger").addEventListener("click", function () {
-  document.querySelector("nav").classList.toggle("show");
-});
-
 function fetchDataAndRender() {
   // Get coin name from URL parameters
   const urlParams = new URLSearchParams(window.location.search);

@@ -81,7 +81,3 @@ window.onload = function () {
     });
 };
 
-// Toggles hamburger overlay
-document.querySelector(".hamburger").addEventListener("click", function () {
-  document.querySelector("nav").classList.toggle("show");
-});
