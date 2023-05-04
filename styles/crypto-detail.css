@@ -25,9 +25,15 @@ main {
   font-size: 4rem;
 }
 .coin-current button i {
-  font-size: 3rem;
-  color: yellow;
+  font-size: 4rem;
+  color: #ee5246;
+  
 }
+.coin-current button i:hover {
+  font-size: 4.5rem;
+  color: #d4716a;
+}
+
 
 .coin-balance {
   display: flex;

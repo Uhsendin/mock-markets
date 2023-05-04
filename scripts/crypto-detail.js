@@ -21,7 +21,7 @@ function fetchDataAndRender() {
       <section class="coin-header">
         <div class="coin-current">
           <p>$${data.market_data.current_price.usd.toLocaleString()}</p>
-          <button class="wishlist-btn"><i class="fa-solid fa-star"></i></button>
+          <button class="wishlist-btn"><i class="fa-solid fa-plus"></i></button>
         </div>
         <p class="${
           data.market_data.price_change_24h >= 0 ? "positive" : "negative"
@@ -88,7 +88,7 @@ function fetchDataAndRender() {
       const wishlistBtn = document.querySelector(".wishlist-btn");
 
       wishlistBtn.addEventListener("click", function () {
-        localStorage.setItem(data.name, data.name);
+        localStorage.setItem("selectedCoin", data.name);
       });
       attachEventListeners();
     });
