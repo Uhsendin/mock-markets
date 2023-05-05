@@ -86,8 +86,8 @@ function fetchDataAndRender() {
       let selectedCryptos = localStorage.getItem("selectedCryptos")
       selectedCryptos = selectedCryptos ? JSON.parse(selectedCryptos) : []
 
-      if (!selectedCryptos.includes(data.name))
-      selectedCryptos.push(data.name)
+      if (!selectedCryptos.includes(data.id))
+      selectedCryptos.push(data.id)
       localStorage.setItem("selectedCryptos", JSON.stringify(selectedCryptos))
       });
       attachEventListeners();
