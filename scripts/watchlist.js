@@ -1,7 +1,7 @@
 // Retrieve the value of "selectedCryptos" from localStorage
-const selectedCryptos = localStorage.getItem('selectedCryptos');
-const watchListContainer = document.querySelector(".watchlist-container")
-const watchList = []
+const selectedCryptos = localStorage.getItem("selectedCryptos");
+const watchListContainer = document.querySelector(".watchlist-container");
+const watchList = [];
 // Check if the value is null or not a valid JSON string
 if (selectedCryptos === null) {
   console.log("selectedCryptos does not exist in localStorage");
@@ -10,42 +10,55 @@ if (selectedCryptos === null) {
     //try to parse the value as JSON
     const parsedCryptos = JSON.parse(selectedCryptos);
     // Push Crypto id to array
-    parsedCryptos.forEach(crypto => {
-      watchList.push(crypto)
-      
+    parsedCryptos.forEach((crypto) => {
+      watchList.push(crypto);
     });
   } catch (error) {
     console.error("Error parsing JSON:", error);
   }
 }
 
-
 //Render coin details from api
 watchList.forEach(async (coin) => {
-    try {
-      const response = await fetch(`https://api.coingecko.com/api/v3/coins/${coin.toLowerCase()}?localization=false&tickers=false&developer_data=false&sparkline=false`);
-      const data = await response.json();
-      
-      const coinContainer = document.createElement('section');
-      coinContainer.classList.add('coin');
-      coinContainer.innerHTML = `
+  try {
+    const response = await fetch(
+      `https://api.coingecko.com/api/v3/coins/${coin.toLowerCase()}?localization=false&tickers=false&developer_data=false&sparkline=false`
+    );
+    const data = await response.json();
+
+    const coinPrice = data.market_data.current_price.usd.toLocaleString(
+      "en-US",
+      { style: "currency", currency: "USD" }
+    );
+    const coin24High = data.market_data.price_change_percentage_24h;
+
+    const coinContainer = document.createElement("section");
+    coinContainer.classList.add("coin");
+    coinContainer.innerHTML = `
      <div class="coin-info">
+     <div class="coin-img">
      <img src="${data.image.small}">
-   <h2>${data.name}</h2>
-   <span>${data.symbol}</span>
+     </div>
+     <div class="coin-name">
+     <h2>${data.name}</h2>
+     <span>${data.symbol}</span>
+     </div>
      </div>
      <div class="coin-prices">
-        <span>${data.market_data.current_price.usd}</span>
-        <span>${data.market_data.price_change_percentage_24h}</span>
+        <span class="current-price">${coinPrice}</span>
+        <span class="price-24-high ${
+          coin24High >= 0 ? "positive" : "negative"
+        }"> <i class="fas ${
+      coin24High >= 0
+        ? "fa-solid fa-arrow-trend-up positive"
+        : "fa-solid fa-arrow-trend-down negative"
+    }"></i> ${coin24High.toFixed(2)}%</span>
      </div>
       `;
-      
-      watchListContainer.appendChild(coinContainer);
-      // Handle the error as needed
-    } catch (error) {
-      console.error('Error fetching coin data:', error);
-    }
-  });
 
-
-
+    watchListContainer.appendChild(coinContainer);
+    // Handle the error as needed
+  } catch (error) {
+    console.error("Error fetching coin data:", error);
+  }
+});

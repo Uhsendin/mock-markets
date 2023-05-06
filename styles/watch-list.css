@@ -1,0 +1,62 @@
+h1 {
+  font-size: 2.5rem;
+}
+
+h1,
+.watchlist-container {
+  padding: 0 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.coin-img,
+.coin-img img {
+  width: 40px;
+  height: 40px;
+}
+.watchlist-container {
+  font-size: 6rem;
+}
+
+.coin {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+.coin span {
+  display: flex;
+}
+
+.coin-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 3.6rem;
+}
+
+.coin-name h2 {
+  font-weight: 700;
+}
+
+.coin-name span {
+  text-transform: uppercase;
+  color: #b8b7b7;
+}
+
+.price-24-high,
+.current-price {
+  justify-content: flex-end;
+}
+
+.price-24-high {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.positive {
+  color: rgb(62, 167, 62);
+}
+
+.negative {
+  color: rgb(243, 29, 29);
+}
