@@ -37,19 +37,19 @@ watchList.forEach(async (coin) => {
     const coinContainer = document.createElement("section");
     coinContainer.classList.add("coin");
     coinContainer.innerHTML = `
-     <div class="coin-info">
-     <div class="coin-img">
-     <img src="${data.image.small}">
-     </div>
-     <div class="coin-name">
-     <h2>${data.name}</h2>
-     <span>${data.symbol}</span>
-     </div>
-     </div>
-     <div class="canvas-container">
-     <canvas class="stock-chart"></canvas>
-     </div>
-     <div class="coin-prices">
+        <div class="coin-info">
+        <div class="coin-img">
+        <img src="${data.image.small}">
+        </div>
+        <div class="coin-name">
+        <h2>${data.name}</h2>
+        <span>${data.symbol}</span>
+        </div>
+        </div>
+        <div class="canvas-container">
+        <canvas class="stock-chart"></canvas>
+        </div>
+        <div class="coin-prices">
         <span class="current-price">${coinPrice}</span>
         <span class="price-24-high ${
           coin24High >= 0 ? "positive" : "negative"
@@ -58,25 +58,36 @@ watchList.forEach(async (coin) => {
         ? "fa-solid fa-arrow-trend-up positive"
         : "fa-solid fa-arrow-trend-down negative"
     }"></i> ${coin24High.toFixed(2)}%</span>
-     </div>
-      `;
+        </div>
+        `;
 
-      watchListContainer.appendChild(coinContainer);
+    watchListContainer.appendChild(coinContainer);
 
-      // Render stock chart
-      const canvas = coinContainer.querySelector(".stock-chart");
-      if (canvas) {
-        const ctx = canvas.getContext("2d");
-        const existingChart = Chart.getChart(ctx);
-        if (existingChart) {
-          existingChart.destroy();
-        }
-        new Chart(ctx, config);
+    // Render stock chart
+    const canvas = coinContainer.querySelector(".stock-chart");
+    if (canvas) {
+      const ctx = canvas.getContext("2d");
+      const existingChart = Chart.getChart(ctx);
+      if (existingChart) {
+        existingChart.destroy();
       }
-
+      new Chart(ctx, config);
+    }
 
     // Handle the error as needed
   } catch (error) {
     console.error("Error fetching coin data:", error);
   }
 });
+
+// Grabs current time in unix format
+function getCurrentUnixTime() {
+  return Math.floor(Date.now() / 1000);
+}
+
+let currentUnixTime = getCurrentUnixTime();
+
+function getYesterdayUnixTime(currentTime) {
+  const oneDayInSeconds = 86400;
+  return currentTime - oneDayInSeconds;
+}
