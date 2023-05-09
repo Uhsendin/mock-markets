@@ -61,7 +61,11 @@ h1,
   color: rgb(243, 29, 29);
 }
 
-.chart-container {
-height: 40px;
-width: fit-content;
+canvas {
+  width: 40px;
+}
+
+.canvas-container {
+  display: flex;
+  align-items: center;
 }

@@ -39,4 +39,14 @@ const config = {
   },
 }
 
-const myChart = new Chart(document.getElementById("myChart"), config);
+export {config}
+
+
+
+
+
+
+
+
+
+

@@ -1,3 +1,5 @@
+import { config } from "./stock-chart.js";
+
 // Retrieve the value of "selectedCryptos" from localStorage
 const selectedCryptos = localStorage.getItem("selectedCryptos");
 const watchListContainer = document.querySelector(".watchlist-container");
@@ -44,6 +46,9 @@ watchList.forEach(async (coin) => {
      <span>${data.symbol}</span>
      </div>
      </div>
+     <div class="canvas-container">
+     <canvas class="stock-chart"></canvas>
+     </div>
      <div class="coin-prices">
         <span class="current-price">${coinPrice}</span>
         <span class="price-24-high ${
@@ -56,7 +61,20 @@ watchList.forEach(async (coin) => {
      </div>
       `;
 
-    watchListContainer.appendChild(coinContainer);
+      watchListContainer.appendChild(coinContainer);
+
+      // Render stock chart
+      const canvas = coinContainer.querySelector(".stock-chart");
+      if (canvas) {
+        const ctx = canvas.getContext("2d");
+        const existingChart = Chart.getChart(ctx);
+        if (existingChart) {
+          existingChart.destroy();
+        }
+        new Chart(ctx, config);
+      }
+
+
     // Handle the error as needed
   } catch (error) {
     console.error("Error fetching coin data:", error);
