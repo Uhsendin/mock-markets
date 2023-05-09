@@ -60,3 +60,8 @@ h1,
 .negative {
   color: rgb(243, 29, 29);
 }
+
+.chart-container {
+height: 40px;
+width: fit-content;
+}

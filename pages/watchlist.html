@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/default.css">
-    <link rel="stylesheet" href="/styles/watch-list.css">
-    <script src="/scripts/watchlist.js" defer></script>
+    <link rel="stylesheet" href="/default.css" />
+    <link rel="stylesheet" href="/styles/watch-list.css" />
+    <script src="/scripts/watchlist.js" type="module" defer></script>
+    <script src="/scripts/stock-chart.js" defer></script>
     <script src="/scripts/hamburger.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -19,28 +22,36 @@
       rel="stylesheet"
     />
     <title>Watchlist</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <div class="overlay"></div>
-        <section class="container">
-          <h1><a href="/index.html">MockMarkets</a></h1>
-          <button class="hamburger"><i class="fa-solid fa-bars hamburger"></i></button>
-        </section>
-        <nav>
-          <ul>
-            <li><a href="#"><i class="fa-solid fa-magnifying-glass"></i></a></li>
-            <li><a href="/pages/watchlist.html">watchlist</a></li>
-            <li><a href="#">trade</a></li>
-            <li><a href="#">balance</a></li>
-            <li><a href="#">notifications</a></li>
-            <li><a href="/pages/account.html">account</a></li>
-          </ul>
-        </nav>
-      </header>
-      <main>
-        <h1>Watchlist</h1>
-            <section class="watchlist-container"></section>
-      </main>
-</body>
+      <div class="overlay"></div>
+      <section class="container">
+        <h1><a href="/index.html">MockMarkets</a></h1>
+        <button class="hamburger">
+          <i class="fa-solid fa-bars hamburger"></i>
+        </button>
+      </section>
+      <nav>
+        <ul>
+          <li>
+            <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+          </li>
+          <li><a href="/pages/watchlist.html">watchlist</a></li>
+          <li><a href="#">trade</a></li>
+          <li><a href="#">balance</a></li>
+          <li><a href="#">notifications</a></li>
+          <li><a href="/pages/account.html">account</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <h1>Watchlist</h1>
+      <div class="chart-container">
+        <canvas id="myChart"></canvas>
+      </div>
+
+      <section class="watchlist-container"></section>
+    </main>
+  </body>
 </html>
