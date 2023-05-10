@@ -83,15 +83,26 @@ function fetchDataAndRender() {
       const wishlistBtn = document.querySelector(".wishlist-btn");
 
       wishlistBtn.addEventListener("click", function () {
-      let selectedCryptos = localStorage.getItem("selectedCryptos")
-      selectedCryptos = selectedCryptos ? JSON.parse(selectedCryptos) : []
+        let selectedCryptos = localStorage.getItem("selectedCryptos");
+        selectedCryptos = selectedCryptos ? JSON.parse(selectedCryptos) : [];
 
-      if (!selectedCryptos.includes(data.id))
-      selectedCryptos.push(data.id)
-      localStorage.setItem("selectedCryptos", JSON.stringify(selectedCryptos))
+        const crypto = {
+          id: data.id,
+          price: data.market_data.current_price.usd.toLocaleString(),
+          price24Change: data.market_data.price_change_24h.toFixed(2),
+        };
+
+        if (!selectedCryptos.some((c) => c.id === crypto.id)) {
+          selectedCryptos.push(crypto);
+          localStorage.setItem(
+            "selectedCryptos",
+            JSON.stringify(selectedCryptos)
+          );
+        }
       });
       attachEventListeners();
     });
 }
 
 document.addEventListener("DOMContentLoaded", fetchDataAndRender);
+
