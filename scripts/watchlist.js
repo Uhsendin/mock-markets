@@ -60,7 +60,6 @@ watchList.forEach(async (coin) => {
     }"></i> ${coin24High.toFixed(2)}%</span>
         </div>
         `;
-
     watchListContainer.appendChild(coinContainer);
 
     // Render stock chart
@@ -85,9 +84,9 @@ function getCurrentUnixTime() {
   return Math.floor(Date.now() / 1000);
 }
 
-let currentUnixTime = getCurrentUnixTime();
-
 function getYesterdayUnixTime(currentTime) {
   const oneDayInSeconds = 86400;
   return currentTime - oneDayInSeconds;
 }
+
+export {getCurrentUnixTime, getYesterdayUnixTime}
