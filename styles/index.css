@@ -14,10 +14,17 @@
   font-size: 3rem;
 }
 
+
 .coin {
   display: flex;
   justify-content: space-between;
   margin-bottom: 15px;
+  padding: .5rem;
+  border-radius: 5px;
+}
+
+.coin:hover {
+  background-color: #343636;
 }
 
 .coin-name {
@@ -37,13 +44,22 @@
 
 .price-24-high {
   display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.price {
+  display: flex;
+}
+.price,.price-24-high {
   justify-content: flex-end;
 }
 
+
 .positive {
-  color: green;
+  color: rgb(62, 167, 62);
 }
 
 .negative {
-  color: red;
+  color: rgb(243, 29, 29);
 }

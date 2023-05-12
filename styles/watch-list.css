@@ -21,6 +21,12 @@ h1,
   display: flex;
   justify-content: space-between;
   margin-bottom: 1.5rem;
+  padding: .5rem;
+  border-radius: 5px;
+}
+
+.coin:hover {
+  background-color: #343636;;
 }
 .coin span {
   display: flex;

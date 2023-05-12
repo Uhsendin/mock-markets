@@ -29,10 +29,7 @@ watchList.forEach(async (coin) => {
     );
     const info = await response.json();
 
-    const coinPriceString = info.market_data.current_price.usd.toLocaleString(
-      "en-US",
-      { style: "currency", currency: "USD" }
-    );
+    const coinPriceString = info.market_data.current_price.usd.toLocaleString(undefined, {maximumFractionDigits:3, minimumFractionDigits:3});
     const coin24High = info.market_data.price_change_percentage_24h;
     const priceChange24Low = info.market_data.low_24h.usd
     const priceChange24High = info.market_data.high_24h.usd
@@ -59,14 +56,14 @@ watchList.forEach(async (coin) => {
         <canvas class="stock-chart"></canvas>
         </div>
         <div class="coin-prices">
-        <span class="current-price">${coinPriceString}</span>
+        <span class="current-price">$${coinPriceString}</span>
         <span class="price-24-high ${
           coin24High >= 0 ? "positive" : "negative"
         }"> <i class="fas ${
       coin24High >= 0
         ? "fa-solid fa-arrow-trend-up positive"
         : "fa-solid fa-arrow-trend-down negative"
-    }"></i> ${coin24High.toFixed(2)}%</span>
+    }"></i> ${coin24High.toFixed(3)}%</span>
         </div>
         `;
     watchListContainer.appendChild(coinContainer);
