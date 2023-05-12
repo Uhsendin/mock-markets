@@ -1,4 +1,4 @@
-import { config } from "./stock-chart.js";
+import { data, config} from "./stock-chart.js";
 
 // Retrieve the value of "selectedCryptos" from localStorage
 const selectedCryptos = localStorage.getItem("selectedCryptos");
@@ -20,37 +20,46 @@ if (selectedCryptos === null) {
   }
 }
 
+
 //Render coin details from api
 watchList.forEach(async (coin) => {
   try {
     const response = await fetch(
-      `https://api.coingecko.com/api/v3/coins/${coin.toLowerCase()}?localization=false&tickers=false&developer_data=false&sparkline=false`
+      `https://api.coingecko.com/api/v3/coins/${coin.id.toLowerCase()}?localization=false&tickers=false&developer_data=false&sparkline=true`
     );
-    const data = await response.json();
+    const info = await response.json();
 
-    const coinPrice = data.market_data.current_price.usd.toLocaleString(
+    const coinPriceString = info.market_data.current_price.usd.toLocaleString(
       "en-US",
       { style: "currency", currency: "USD" }
     );
-    const coin24High = data.market_data.price_change_percentage_24h;
+    const coin24High = info.market_data.price_change_percentage_24h;
+    const priceChange24Low = info.market_data.low_24h.usd
+    const priceChange24High = info.market_data.high_24h.usd
+    const curPrice = info.market_data.current_price.usd
+    const sparklineList = info.market_data.sparkline_7d.price
+    const sparkLineCurrentDay = sparklineList.slice(-24)
+        
+    
+    
 
     const coinContainer = document.createElement("section");
     coinContainer.classList.add("coin");
     coinContainer.innerHTML = `
         <div class="coin-info">
         <div class="coin-img">
-        <img src="${data.image.small}">
+        <img src="${info.image.small}">
         </div>
         <div class="coin-name">
-        <h2>${data.name}</h2>
-        <span>${data.symbol}</span>
+        <h2>${info.name}</h2>
+        <span>${info.symbol}</span>
         </div>
         </div>
         <div class="canvas-container">
         <canvas class="stock-chart"></canvas>
         </div>
         <div class="coin-prices">
-        <span class="current-price">${coinPrice}</span>
+        <span class="current-price">${coinPriceString}</span>
         <span class="price-24-high ${
           coin24High >= 0 ? "positive" : "negative"
         }"> <i class="fas ${
@@ -61,32 +70,27 @@ watchList.forEach(async (coin) => {
         </div>
         `;
     watchListContainer.appendChild(coinContainer);
+    
+  
+    coinContainer.querySelectorAll(".stock-chart").forEach(canvas => {
+      if (canvas) {
+        data.datasets[0].data = sparkLineCurrentDay
+        data.datasets[0].borderColor = coin24High < 0 ? "red" : "green"
+        
+        const ctx = canvas.getContext("2d")
+        const existingChart = Chart.getChart(ctx)
+        if (existingChart) {
+          existingChart.destory()
+        }
+        new Chart(ctx, config)
 
-    // Render stock chart
-    const canvas = coinContainer.querySelector(".stock-chart");
-    if (canvas) {
-      const ctx = canvas.getContext("2d");
-      const existingChart = Chart.getChart(ctx);
-      if (existingChart) {
-        existingChart.destroy();
       }
-      new Chart(ctx, config);
-    }
+    })
 
     // Handle the error as needed
   } catch (error) {
-    console.error("Error fetching coin data:", error);
+    console.error("Error fetching coin info:", error);
   }
 });
 
-// Grabs current time in unix format
-function getCurrentUnixTime() {
-  return Math.floor(Date.now() / 1000);
-}
 
-function getYesterdayUnixTime(currentTime) {
-  const oneDayInSeconds = 86400;
-  return currentTime - oneDayInSeconds;
-}
-
-export {getCurrentUnixTime, getYesterdayUnixTime}

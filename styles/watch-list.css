@@ -62,7 +62,7 @@ h1,
 }
 
 canvas {
-  width: 40px;
+  width: 60px !important;
 }
 
 .canvas-container {
