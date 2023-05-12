@@ -28,7 +28,7 @@ class Coin {
       <div>
       </section>
       <section class="coin-price">
-      <p class="price">$${this.price.toFixed(2)}</p>
+      <p class="price">$${this.price.toFixed(2).toLocaleString()}</p>
       <p class="price-24-high ${
         this.price24High >= 0 ? "positive" : "negative"
       }">${this.price24High.toFixed(2)}%</p>
