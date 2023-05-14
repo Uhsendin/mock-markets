@@ -57,7 +57,7 @@ class CoinList {
   }
 
   render() {
-    this.coinsListElement.innerHTML = `<h2 class="prices">Prices</h2>`;
+    this.coinsListElement.innerHTML = `<h2 class="prices">Today's Crypto Prices</h2>`;
     for (let i = 0; i < this.coins.length; i++) {
       const coinElement = this.coins[i].render();
       this.coinsListElement.appendChild(coinElement);

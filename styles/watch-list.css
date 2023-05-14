@@ -26,7 +26,8 @@ h1,
 }
 
 .coin:hover {
-  background-color: #343636;;
+  background-color: #343636;
+  cursor: pointer;
 }
 .coin span {
   display: flex;
