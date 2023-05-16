@@ -82,14 +82,12 @@ function fetchDataAndRender() {
           data.datasets[0].pointRadius = 1
           data.datasets[0].borderColor = coin24High < 0 ? "red" : "green";
           config.options.plugins.tooltip.enabled = true
+          config.options.plugins.tooltip.mode = "index"
+          config.options.plugins.tooltip.intersect = false
           config.options.scales.x.display = true
           config.options.scales.y.display = true
 
           const ctx = canvas.getContext("2d");
-          // const existingChart = Chart.getChart(ctx);
-          // if (existingChart) {
-          //   existingChart.destory();
-          // }
           new Chart(ctx, config);
         }
       };
