@@ -5,9 +5,11 @@ const generateDayArray = () => {
   for (let i = 0; i < 24; i++) {
     const hour = currentTime.getHours()
     const minute = currentTime.getMinutes()
-    const timeStr = hour + ":" + (minute < 10 ? "0" : "") + minute
+    const hourStr = (hour < 10 ? "0" : "") + hour
+    const minuteStr = (minute < 10 ? "0": "") + minute
+    const timeStr = hourStr + ":" + minuteStr
     dayArray.unshift(timeStr)
-    // currentTime.setHours(hour -1)
+    currentTime.setHours(hour -1)
   }
   return dayArray
 }
