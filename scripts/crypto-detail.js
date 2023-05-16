@@ -1,3 +1,5 @@
+import { data, config, labels } from "./stock-chart.js";
+
 function fetchDataAndRender() {
   // Get coin name from URL parameters
   const urlParams = new URLSearchParams(window.location.search);
@@ -5,35 +7,48 @@ function fetchDataAndRender() {
 
   // Fetch data from API
   fetch(
-    `https://api.coingecko.com/api/v3/coins/${coinName}?localization=false&tickers=false&developer_data=false&sparkline=false`
+    `https://api.coingecko.com/api/v3/coins/${coinName}?localization=false&tickers=false&developer_data=false&sparkline=true`
   )
     .then((res) => res.json())
-    .then((data) => {
+    .then((info) => {
       // Render coin details on the page
       const coinDetailsElement = document.getElementById("coin-details");
+      const coin24High = info.market_data.price_change_percentage_24h;
+      const sparklineList = info.market_data.sparkline_7d.price;
+      const sparkLineCurrentDay = sparklineList.slice(-24);
+      const currentPrice = info.market_data.current_price.usd;
+      const PriceChange24h = info.market_data.price_change_24h;
+      const coinImg = info.image.small
+      const coinTitle = info.name
+      const coinDes = info.description.en
+      const coinRank = info.market_cap_rank
+      const marketCap = info.market_data.market_cap.usd
+      const volume = info.market_data.total_volume.usd
+      const coinSupply = info.market_data.circulating_supply
+
       coinDetailsElement.innerHTML = `
-      <h1>${data.name} Price</h1>
+      <h1>${info.name} Price</h1>
       <section class="coin-header">
         <div class="coin-current">
-          <p>$${data.market_data.current_price.usd.toLocaleString()}</p>
+          <p>$${currentPrice.toLocaleString()}</p>
           <button class="wishlist-btn"><i class="fa-solid fa-plus"></i></button>
         </div>
         <p class="${
-          data.market_data.price_change_24h >= 0 ? "positive" : "negative"
-        }">$${data.market_data.price_change_24h.toFixed(
-        2
-      )} (${data.market_data.price_change_percentage_24h.toFixed(2)}%)</p>
+          PriceChange24h >= 0 ? "positive" : "negative"
+        }">$${PriceChange24h.toFixed(2)} (${coin24High.toFixed(2)}%)</p>
       </section>
-      <section class="coin-graph"></section>
+      <section class="coin-graph">
+      <canvas class="canvas-graph"></canvas>
+      </section>
       <section class="coin-info">
         <div class="your-balance">
           <p class="balance-title">Your balance</p>
           <p class="balance">$100,000</p>
           <div class="coin-balance">
             <div class="coin-primary-balance">
-              <img src="${data.image.small}" alt="${data.name}">
+              <img src="${coinImg}" alt="${coinTitle}">
               <div class="coin-text">
-                <h2>${data.name}</h2>
+                <h2>${coinTitle}</h2>
                 <p>Primary balance</p>
               </div>
             </div>
@@ -44,19 +59,41 @@ function fetchDataAndRender() {
           </div>
         </div>
         <section class="about-coin">
-          <p>About ${data.name}</p>
-          <p class="coin-des">${data.description.en}</p>
+          <p>About ${coinTitle}</p>
+          <p class="coin-des">${coinDes}</p>
           <button class="view-more">View more</button>
         </section>
         <section class="coin-market-stats">
           <h2>Market stats</h2>
-          <p>Popularity ${data.market_cap_rank}</p>
-          <p>Market cap ${data.market_data.market_cap.usd.toLocaleString()}</p>
-          <p>Volume ${data.market_data.total_volume.usd.toLocaleString()}</p>
-          <p>Circulating supply ${data.market_data.circulating_supply.toLocaleString()}</p>
+          <p>Popularity ${coinRank}</p>
+          <p>Market cap ${marketCap.toLocaleString()}</p>
+          <p>Volume ${volume.toLocaleString()}</p>
+          <p>Circulating supply ${coinSupply.toLocaleString()}</p>
         </section>
       </section>
       `;
+
+      const cryptoGraph = () => {
+        const canvas = document.querySelector(".canvas-graph");
+        console.log();
+        if (canvas) {
+          data.labels = labels
+          data.datasets[0].data = sparkLineCurrentDay;
+          data.datasets[0].pointRadius = 1
+          data.datasets[0].borderColor = coin24High < 0 ? "red" : "green";
+          config.options.plugins.tooltip.enabled = true
+          config.options.scales.x.display = true
+          config.options.scales.y.display = true
+
+          const ctx = canvas.getContext("2d");
+          // const existingChart = Chart.getChart(ctx);
+          // if (existingChart) {
+          //   existingChart.destory();
+          // }
+          new Chart(ctx, config);
+        }
+      };
+      cryptoGraph();
 
       // Attach event listeners
       const attachEventListeners = () => {
@@ -105,4 +142,3 @@ function fetchDataAndRender() {
 }
 
 document.addEventListener("DOMContentLoaded", fetchDataAndRender);
-
