@@ -18,13 +18,13 @@ function fetchDataAndRender() {
       const sparkLineCurrentDay = sparklineList.slice(-24);
       const currentPrice = info.market_data.current_price.usd;
       const PriceChange24h = info.market_data.price_change_24h;
-      const coinImg = info.image.small
-      const coinTitle = info.name
-      const coinDes = info.description.en
-      const coinRank = info.market_cap_rank
-      const marketCap = info.market_data.market_cap.usd
-      const volume = info.market_data.total_volume.usd
-      const coinSupply = info.market_data.circulating_supply
+      const coinImg = info.image.small;
+      const coinTitle = info.name;
+      const coinDes = info.description.en;
+      const coinRank = info.market_cap_rank;
+      const marketCap = info.market_data.market_cap.usd;
+      const volume = info.market_data.total_volume.usd;
+      const coinSupply = info.market_data.circulating_supply;
 
       coinDetailsElement.innerHTML = `
       <h1>${info.name} Price</h1>
@@ -77,15 +77,15 @@ function fetchDataAndRender() {
         const canvas = document.querySelector(".canvas-graph");
         console.log();
         if (canvas) {
-          data.labels = labels
+          data.labels = labels;
           data.datasets[0].data = sparkLineCurrentDay;
-          data.datasets[0].pointRadius = 1
+          data.datasets[0].pointRadius = 1;
           data.datasets[0].borderColor = coin24High < 0 ? "red" : "green";
-          config.options.plugins.tooltip.enabled = true
-          config.options.plugins.tooltip.mode = "index"
-          config.options.plugins.tooltip.intersect = false
-          config.options.scales.x.display = true
-          config.options.scales.y.display = true
+          config.options.plugins.tooltip.enabled = true;
+          config.options.plugins.tooltip.mode = "index";
+          config.options.plugins.tooltip.intersect = false;
+          config.options.scales.x.display = true;
+          config.options.scales.y.display = true;
 
           const ctx = canvas.getContext("2d");
           new Chart(ctx, config);
@@ -121,11 +121,7 @@ function fetchDataAndRender() {
         let selectedCryptos = localStorage.getItem("selectedCryptos");
         selectedCryptos = selectedCryptos ? JSON.parse(selectedCryptos) : [];
 
-        const crypto = {
-          id: data.id,
-          price: data.market_data.current_price.usd.toLocaleString(),
-          price24Change: data.market_data.price_change_24h.toFixed(2),
-        };
+        const crypto = { id: info.id }
 
         if (!selectedCryptos.some((c) => c.id === crypto.id)) {
           selectedCryptos.push(crypto);
