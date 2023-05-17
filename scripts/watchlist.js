@@ -66,6 +66,10 @@ watchList.forEach(async (coin) => {
     }"></i> ${coin24High.toFixed(3)}%</span>
         </div>
         `;
+        coinContainer.addEventListener("click", () => {
+          window.location.href = `/pages/crypto-details.html?coin=${info.id}`;
+        });
+
     watchListContainer.appendChild(coinContainer);
     
   

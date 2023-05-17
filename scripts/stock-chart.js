@@ -13,7 +13,6 @@ const generateDayArray = () => {
   }
   return dayArray
 }
-console.log(generateDayArray())
 
 const labels = generateDayArray();
 
