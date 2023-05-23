@@ -43,7 +43,7 @@ function fetchDataAndRender() {
       <section class="coin-info">
         <div class="your-balance">
           <p class="balance-title">Your balance</p>
-          <p class="balance">$100,000</p>
+          <p class="balance">$${localStorage.getItem("accountBalance")}</p>
           <div class="coin-balance">
             <div class="coin-primary-balance">
               <img src="${coinImg}" alt="${coinTitle}">

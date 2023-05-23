@@ -85,3 +85,8 @@ window.onload = function () {
     });
 };
 
+if (!localStorage.getItem("accountBalance")) {
+  localStorage.setItem("accountBalance", 0)
+}
+
+

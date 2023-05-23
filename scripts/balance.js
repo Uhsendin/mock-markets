@@ -1,7 +1,6 @@
 const amountInput = document.getElementById("amount");
 const addFundsBtn = document.querySelector(".btn");
 const currentBalanceElm = document.querySelector(".current-balance");
-let currentBalance = localStorage.getItem("accountBalance") || 0;
 
 // Retrieve the saved balance from local storage, if available
 let balance = localStorage.getItem("accountBalance") || 0;
