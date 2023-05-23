@@ -1,0 +1,34 @@
+main {
+    padding: 0 2rem;
+}
+h1 {
+    font-size: 2.5rem;
+}
+
+legend,label,p, .amount{
+    font-size: 1.8rem;
+}
+
+.amount {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+input {
+    border: none;
+    border-bottom: solid 1px white;
+    color: white;
+}
+
+span {
+    font-size: inherit;
+}
+
+button {
+    display: block;
+    font-size: 1rem;
+    background-color: #ee5246;
+    padding: 10px 20px;
+    border-radius: 10px;
+}

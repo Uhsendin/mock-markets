@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/default.css" />
+    <link rel="stylesheet" href="/styles/balance.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -44,12 +45,14 @@
       <h1>Account Balance</h1>
       <section class="balance-container">
         <form action="#">
-            <legend>Add funds to your balance</legend>
-          <label for="amount">Amount</label>
-          <input type="number" id="amount" />
-          <button>Add <span>$1234</span>to my balance</button>
+          <legend>Add funds to your balance</legend>
+          <div class="amount">
+            <label for="amount">Amount</label>
+            <input type="number" id="amount" />
+          </div>
+          <p>MockMarkets account <span>$123,456,789</span></p>
+          <button>Add funds to my balance</button>
         </form>
-        <p>MockMarkets account <span>$123,456,789</span></p>
       </section>
     </main>
   </body>
