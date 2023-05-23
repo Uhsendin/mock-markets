@@ -17,7 +17,8 @@ legend,label,p, .amount{
 
 input {
     border: none;
-    border-bottom: solid 1px white;
+    border: solid 1px white;
+    width: 75px;
     color: white;
 }
 
@@ -27,7 +28,7 @@ span {
 
 button {
     display: block;
-    font-size: 1rem;
+    font-size: 1.5rem;
     background-color: #ee5246;
     padding: 10px 20px;
     border-radius: 10px;

@@ -55,8 +55,9 @@ function fetchDataAndRender() {
             <div class="coin-shares">
               <p>$10,000</p>
               <p>$-1,304</p>
-            </div>
-          </div>
+              </div>
+              </div>
+              <button class="trade">Trade</button>
         </div>
         <section class="about-coin">
           <p>About ${coinTitle}</p>

@@ -105,3 +105,13 @@ main {
   color: #ee5246;
   font-size: 1.5rem;
 }
+
+
+.trade {
+  margin-top: 1.5rem;
+  background-color: #ee5246;
+  font-size: 2rem;
+  padding: 8px;
+  width: 100%;
+  border-radius: 75px;
+}
