@@ -57,7 +57,7 @@ function fetchDataAndRender() {
               <p>$-1,304</p>
               </div>
               </div>
-              <button class="trade">Trade</button>
+              <button class="trade" id="trade">Trade</button>
         </div>
         <section class="about-coin">
           <p>About ${coinTitle}</p>
@@ -94,6 +94,20 @@ function fetchDataAndRender() {
       };
       cryptoGraph();
 
+      const openModalBtn = document.getElementById("trade");
+      const modal = document.getElementById("modal");
+      const closeModal = document.getElementsByClassName("close")[0];
+     
+      openModalBtn.addEventListener("click", function () {
+        modal.style.display = "block";
+        document.body.classList.add("modal-open")
+      });
+
+      closeModal.addEventListener("click", function () {
+        modal.style.display = "none";
+        document.body.classList.remove("modal-open")
+      });
+
       // Attach event listeners
       const attachEventListeners = () => {
         // Event listener for "View more" button
@@ -122,7 +136,7 @@ function fetchDataAndRender() {
         let selectedCryptos = localStorage.getItem("selectedCryptos");
         selectedCryptos = selectedCryptos ? JSON.parse(selectedCryptos) : [];
 
-        const crypto = { id: info.id }
+        const crypto = { id: info.id };
 
         if (!selectedCryptos.some((c) => c.id === crypto.id)) {
           selectedCryptos.push(crypto);
