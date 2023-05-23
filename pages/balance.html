@@ -17,6 +17,7 @@
       rel="stylesheet"
     />
     <script src="/scripts/hamburger.js" defer></script>
+    <script src="/scripts/balance.js" defer></script>
     <title>MockMarkets | Balance</title>
   </head>
   <body>
@@ -44,14 +45,14 @@
     <main>
       <h1>Account Balance</h1>
       <section class="balance-container">
-        <form action="#">
+        <form id="balanceForm">
           <legend>Add funds to your balance</legend>
           <div class="amount">
             <label for="amount">Amount</label>
             <input type="number" id="amount" />
           </div>
-          <p>MockMarkets account <span>$123,456,789</span></p>
-          <button>Add funds to my balance</button>
+          <p>MockMarkets account <span class="current-balance">$123,456,789</span></p>
+          <button class="btn">Add funds to my balance</button>
         </form>
       </section>
     </main>
