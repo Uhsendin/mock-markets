@@ -7,7 +7,11 @@ const fetchData = async () => {
   const watchList = [];
   // Check if the value is null or not a valid JSON string
   if (selectedCryptos === null) {
-    console.log("selectedCryptos does not exist in localStorage")
+    const newDiv = document.createElement("div");
+    newDiv.className = "empty-watchlist"
+    newDiv.innerHTML = `
+    <p>Oops looks like your watchlist is empty. Click <a href="/">here</a> to add cryptos to your list!</p>`;
+    document.querySelector(".watchlist").insertAdjacentElement("afterend", newDiv)
 
   } else {
     try {
