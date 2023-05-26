@@ -31,7 +31,15 @@ const fetchData = async () => {
 
       // If there are no coinIds, exit the function without making the fetch request
       if (coinIds.length === 0) {
-          return
+        trashIcon.style.display = "none";
+    const newDiv = document.createElement("div");
+    newDiv.className = "empty-watchlist";
+    newDiv.innerHTML = `
+    <p>Oops looks like your watchlist is empty. Click <a href="/">here</a> to add cryptos to your list!</p>`;
+    document
+      .querySelector(".watchlist")
+      .insertAdjacentElement("beforeend", newDiv);
+        return
       }
 
       // Construct the URL for the batch request
@@ -89,7 +97,6 @@ const fetchData = async () => {
         const removeBtn = coinContainer.querySelector(".remove");
         removeBtn.addEventListener("click", () => {
           const coinId = info.id;
-          console.log(coinId);
 
           // Remove the coin from the parsedCoins array
           parsedCryptos = parsedCryptos.filter(
@@ -104,6 +111,10 @@ const fetchData = async () => {
             "selectedCryptos",
             JSON.stringify(parsedCryptos)
           );
+
+          if (parsedCryptos.length === 0) {
+            window.location.reload()
+          }
         });
 
         coinContainer.addEventListener("click", () => {
