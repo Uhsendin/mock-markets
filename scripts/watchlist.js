@@ -1,6 +1,7 @@
 import { data, config } from "./stock-chart.js";
 
 let deleteBtnStatus = false;
+let parsedCryptos = [];
 
 const fetchData = async () => {
   // Retrieve the value of "selectedCryptos" from localStorage
@@ -9,7 +10,7 @@ const fetchData = async () => {
   const watchList = [];
   // Check if the value is null or not a valid JSON string
   if (selectedCryptos === null) {
-    trashIcon.style.display = "none"
+    trashIcon.style.display = "none";
     const newDiv = document.createElement("div");
     newDiv.className = "empty-watchlist";
     newDiv.innerHTML = `
@@ -20,13 +21,18 @@ const fetchData = async () => {
   } else {
     try {
       // Try to parse the value as JSON
-      const parsedCryptos = JSON.parse(selectedCryptos);
+      let parsedCryptos = JSON.parse(selectedCryptos);
       // Push Crypto id to array
       parsedCryptos.forEach((crypto) => {
         watchList.push(crypto);
       });
 
       const coinIds = watchList.map((coin) => coin.id);
+
+      // If there are no coinIds, exit the function without making the fetch request
+      if (coinIds.length === 0) {
+          return
+      }
 
       // Construct the URL for the batch request
       const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinIds.join(
@@ -79,6 +85,26 @@ const fetchData = async () => {
               
               </div>
         `;
+
+        const removeBtn = coinContainer.querySelector(".remove");
+        removeBtn.addEventListener("click", () => {
+          const coinId = info.id;
+          console.log(coinId);
+
+          // Remove the coin from the parsedCoins array
+          parsedCryptos = parsedCryptos.filter(
+            (crypto) => crypto.id !== coinId
+          );
+
+          // Remove the coin container from the DOM
+          coinContainer.remove();
+
+          // Save the updated parsedCoins to localStorage
+          localStorage.setItem(
+            "selectedCryptos",
+            JSON.stringify(parsedCryptos)
+          );
+        });
 
         coinContainer.addEventListener("click", () => {
           if (!deleteBtnStatus) {
