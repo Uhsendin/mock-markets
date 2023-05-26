@@ -14,7 +14,6 @@
   color: #ffffff;
 }
 
-
 .delete p {
   display: none;
   font-size: 2rem;
@@ -25,14 +24,13 @@
 .header i:focus,
 .delete p:hover,
 .delete p:focus {
-color: #cec7c7;
-cursor: pointer;
+  color: #cec7c7;
+  cursor: pointer;
 }
 
 .watchlist-container,
 .header {
   padding: 0 2rem;
-  
 }
 
 .coin-img,
@@ -48,11 +46,11 @@ cursor: pointer;
   display: flex;
   justify-content: space-between;
   margin-bottom: 1.5rem;
-  /* padding: .5rem; */
+  padding: .5rem;
   border-radius: 5px;
 }
 
-.coin:hover {
+.coin:hover{
   background-color: #343636;
   cursor: pointer;
 }
@@ -76,8 +74,28 @@ cursor: pointer;
   color: #b8b7b7;
 }
 
-.hidden {
-  display: none !important;
+.coin-prices {
+  display: flex;
+  align-items: center;
+  font-size: 3.6rem;
+}
+
+.coin:hover .remove {
+  background-color: #343636;
+}
+
+.remove {
+  display: none;
+  padding-left: 1rem;
+  line-height: normal;
+}
+
+.remove:hover {
+  cursor: pointer;
+}
+
+.remove i {
+  font-size: 2.5rem;
 }
 
 .price-24-high,

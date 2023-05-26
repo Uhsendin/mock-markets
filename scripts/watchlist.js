@@ -1,5 +1,7 @@
 import { data, config } from "./stock-chart.js";
 
+let deleteBtnStatus = false;
+
 const fetchData = async () => {
   // Retrieve the value of "selectedCryptos" from localStorage
   const selectedCryptos = localStorage.getItem("selectedCryptos");
@@ -58,21 +60,29 @@ const fetchData = async () => {
             <canvas class="stock-chart"></canvas>
           </div>
           <div class="coin-prices">
-            <span class="current-price">$${coinPriceString}</span>
-            <span class="price-24-high ${
-              coin24High >= 0 ? "positive" : "negative"
-            }">
-              <i class="fas ${
-                coin24High >= 0
-                  ? "fa-solid fa-arrow-trend-up positive"
-                  : "fa-solid fa-arrow-trend-down negative"
-              }"></i> ${coin24High.toFixed(3)}%
+          <div class="price-container">
+          <span class="current-price">$${coinPriceString}</span>
+          <span class="price-24-high ${
+            coin24High >= 0 ? "positive" : "negative"
+          }">
+            <i class="fas ${
+              coin24High >= 0
+                ? "fa-solid fa-arrow-trend-up positive"
+                : "fa-solid fa-arrow-trend-down negative"
+            }"></i> ${coin24High.toFixed(3)}%
             </span>
           </div>
+          <button class="remove" id="remove">
+          <i class="fa-solid fa-circle-minus"></i>
+          </button>
+              
+              </div>
         `;
 
         coinContainer.addEventListener("click", () => {
-          window.location.href = `/pages/crypto-details.html?coin=${info.id}`;
+          if (!deleteBtnStatus) {
+            window.location.href = `/pages/crypto-details.html?coin=${info.id}`;
+          }
         });
 
         watchListContainer.appendChild(coinContainer);
@@ -98,20 +108,32 @@ const fetchData = async () => {
 };
 
 const deleteBtn = document.querySelector(".delete");
-const trashIcon = document.getElementById("trash-icon")
-let deleteBtnStatus = false;
+const trashIcon = document.getElementById("trash-icon");
 
 deleteBtn.addEventListener("click", (_) => {
   if (!deleteBtnStatus) {
-    deleteBtnStatus = true
-    trashIcon.style.display = "none"
-    document.querySelector(".delete p").style.display = "block"
+    deleteBtnStatus = true;
+    trashIcon.style.display = "none";
+    document.querySelector(".delete p").style.display = "block";
+    document.querySelectorAll(".remove").forEach((btn) => {
+      btn.style.display = "block";
+    });
 
+    document.querySelectorAll(".canvas-container").forEach((canvas) => {
+      canvas.style.display = "none";
+    });
   } else {
-    deleteBtnStatus = false
-    trashIcon.style.display = "inline-block"
-    document.querySelector(".delete p").style.display = "none"
+    deleteBtnStatus = false;
+    trashIcon.style.display = "inline-block";
+    document.querySelector(".delete p").style.display = "none";
 
+    document.querySelectorAll(".remove").forEach((btn) => {
+      btn.style.display = "none";
+    });
+
+    document.querySelectorAll(".canvas-container").forEach((canvas) => {
+      canvas.style.display = "block";
+    });
   }
 });
 
