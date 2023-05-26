@@ -8,11 +8,12 @@ const fetchData = async () => {
   // Check if the value is null or not a valid JSON string
   if (selectedCryptos === null) {
     const newDiv = document.createElement("div");
-    newDiv.className = "empty-watchlist"
+    newDiv.className = "empty-watchlist";
     newDiv.innerHTML = `
     <p>Oops looks like your watchlist is empty. Click <a href="/">here</a> to add cryptos to your list!</p>`;
-    document.querySelector(".watchlist").insertAdjacentElement("afterend", newDiv)
-
+    document
+      .querySelector(".watchlist")
+      .insertAdjacentElement("afterend", newDiv);
   } else {
     try {
       // Try to parse the value as JSON
@@ -95,5 +96,23 @@ const fetchData = async () => {
     }
   }
 };
+
+const deleteBtn = document.querySelector(".delete");
+const trashIcon = document.getElementById("trash-icon")
+let deleteBtnStatus = false;
+
+deleteBtn.addEventListener("click", (_) => {
+  if (!deleteBtnStatus) {
+    deleteBtnStatus = true
+    trashIcon.style.display = "none"
+    document.querySelector(".delete p").style.display = "block"
+
+  } else {
+    deleteBtnStatus = false
+    trashIcon.style.display = "inline-block"
+    document.querySelector(".delete p").style.display = "none"
+
+  }
+});
 
 fetchData();
