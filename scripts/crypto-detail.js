@@ -25,7 +25,7 @@ function fetchDataAndRender() {
       const marketCap = info.market_data.market_cap.usd;
       const volume = info.market_data.total_volume.usd;
       const coinSupply = info.market_data.circulating_supply;
-
+    
       coinDetailsElement.innerHTML = `
       <h1>${info.name} Price</h1>
       <section class="coin-header">
