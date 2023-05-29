@@ -74,6 +74,15 @@ function fetchDataAndRender() {
       </section>
       `;
 
+        document.querySelector(".span-header.buy").textContent = `Buy ${info.symbol.toUpperCase()}`
+        document.querySelector(".span-subtext.buy").textContent = `Buy ${info.symbol.toUpperCase()} with cash`
+        document.querySelector(".span-header.sell").textContent = `Sell ${info.symbol.toUpperCase()}`
+        document.querySelector(".span-subtext.sell").textContent = `Sell ${info.symbol.toUpperCase()} for cash`
+
+
+
+
+
       const cryptoGraph = () => {
         const canvas = document.querySelector(".canvas-graph");
         console.log();
