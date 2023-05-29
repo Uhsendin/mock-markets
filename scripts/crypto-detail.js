@@ -25,7 +25,7 @@ function fetchDataAndRender() {
       const marketCap = info.market_data.market_cap.usd;
       const volume = info.market_data.total_volume.usd;
       const coinSupply = info.market_data.circulating_supply;
-    
+
       coinDetailsElement.innerHTML = `
       <h1>${info.name} Price</h1>
       <section class="coin-header">
@@ -61,8 +61,19 @@ function fetchDataAndRender() {
         </div>
         <section class="about-coin">
           <p>About ${coinTitle}</p>
-          <p class="coin-des">${coinDes}</p>
-          <button class="view-more">View more</button>
+          <p class="coin-des">${
+            coinDes.length === 0
+              ? `We regret the absence of a description for ${
+                  coinName.charAt(0).toUpperCase() + coinName.slice(1)
+                }. In the meantime, you can examine its market capitalization, trading volume, and historical price data to gauge its significance within the crypto ecosystem.`
+              : coinDes
+          }</p>
+          ${
+            coinDes.length !== 0
+              ? ` <button class="view-more">View more</button>`
+              : ""
+          }
+         
         </section>
         <section class="coin-market-stats">
           <h2>Market stats</h2>
@@ -74,14 +85,18 @@ function fetchDataAndRender() {
       </section>
       `;
 
-        document.querySelector(".span-header.buy").textContent = `Buy ${info.symbol.toUpperCase()}`
-        document.querySelector(".span-subtext.buy").textContent = `Buy ${info.symbol.toUpperCase()} with cash`
-        document.querySelector(".span-header.sell").textContent = `Sell ${info.symbol.toUpperCase()}`
-        document.querySelector(".span-subtext.sell").textContent = `Sell ${info.symbol.toUpperCase()} for cash`
-
-
-
-
+      document.querySelector(
+        ".span-header.buy"
+      ).textContent = `Buy ${info.symbol.toUpperCase()}`;
+      document.querySelector(
+        ".span-subtext.buy"
+      ).textContent = `Buy ${info.symbol.toUpperCase()} with cash`;
+      document.querySelector(
+        ".span-header.sell"
+      ).textContent = `Sell ${info.symbol.toUpperCase()}`;
+      document.querySelector(
+        ".span-subtext.sell"
+      ).textContent = `Sell ${info.symbol.toUpperCase()} for cash`;
 
       const cryptoGraph = () => {
         const canvas = document.querySelector(".canvas-graph");
@@ -106,32 +121,36 @@ function fetchDataAndRender() {
       const openModalBtn = document.getElementById("trade");
       const modal = document.getElementById("modal");
       const closeModal = document.getElementsByClassName("close")[0];
-     
+
       openModalBtn.addEventListener("click", function () {
         modal.style.display = "block";
-        document.body.classList.add("modal-open")
+        document.body.classList.add("modal-open");
       });
 
       closeModal.addEventListener("click", function () {
         modal.style.display = "none";
-        document.body.classList.remove("modal-open")
+        document.body.classList.remove("modal-open");
       });
 
       // Attach event listeners
-      const attachEventListeners = () => {
-        // Event listener for "View more" button
-        const btnViewMore = document.querySelector(".view-more");
-        btnViewMore.addEventListener("click", function () {
-          const paragraph = document.querySelector(".coin-des");
-          paragraph.classList.toggle("expand");
+      if (coinDes.length !== 0) {
+        const attachEventListeners = () => {
+          // Event listener for "View more" button
+          const btnViewMore = document.querySelector(".view-more");
+          btnViewMore.addEventListener("click", function () {
+            const paragraph = document.querySelector(".coin-des");
+            paragraph.classList.toggle("expand");
 
-          if (btnViewMore.textContent === "View more") {
-            btnViewMore.textContent = "View less";
-          } else {
-            btnViewMore.textContent = "View more";
-          }
-        });
-      };
+            if (btnViewMore.textContent === "View more") {
+              btnViewMore.textContent = "View less";
+            } else {
+              btnViewMore.textContent = "View more";
+            }
+          });
+        };
+
+        attachEventListeners();
+      }
 
       // Make all links within .coin-des open in new tabs
       const coinDesLinks = document.querySelectorAll(".coin-des a");
@@ -155,7 +174,6 @@ function fetchDataAndRender() {
           );
         }
       });
-      attachEventListeners();
     });
 }
 
