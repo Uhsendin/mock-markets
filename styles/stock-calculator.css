@@ -1,0 +1,58 @@
+main {
+  padding: 0 2rem;
+}
+
+.order-header {
+  display: flex;
+  font-size: 3rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.buy-sell {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.pill {
+  font-size: 2.5rem;
+  display: flex;
+  background-color: rgb(56, 54, 54);
+  border-radius: 3rem;
+  width: min-content;
+  gap: 10px;
+}
+.pill span {
+  border-radius: 3rem;
+  padding: 0.7rem 3rem;
+}
+
+.active-pill {
+  background-color: #ee5246;
+}
+
+.amount {
+  width: fit-content;
+}
+.amount input {
+  border: none;
+  width: 40px;
+  font-size: 6rem;
+}
+
+.amount span {
+  font-size: 6rem;
+  color: #6d7272;
+}
+.coin-share {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 3rem;
+}
+
+.coin-share i,
+.coin-share span {
+  color: #ee5246;
+}
