@@ -14,5 +14,6 @@ if (coinDetailsParsed.buy) {
     document.getElementById("sell").classList.add("active-pill")
 }
 
-
-
+document.querySelector(".order-header a").addEventListener("click", () => {
+    window.location.href = `/pages/crypto-details.html?coin=${coinDetailsParsed.id}`;
+  })

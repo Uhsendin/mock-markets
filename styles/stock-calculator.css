@@ -9,6 +9,10 @@ main {
   justify-content: space-between;
 }
 
+.order-header a {
+  font-size: inherit;
+}
+
 .buy-sell {
   margin-top: 5rem;
   display: flex;
