@@ -112,4 +112,8 @@ main {
   justify-content: space-between;
 }
 
+.coin-name {
+  text-transform: capitalize;
+}
+
 

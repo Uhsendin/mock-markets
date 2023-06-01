@@ -25,9 +25,7 @@ function fetchDataAndRender() {
       const marketCap = info.market_data.market_cap.usd;
       const volume = info.market_data.total_volume.usd;
       const coinSupply = info.market_data.circulating_supply;
-      console.log(sparklineList)
-      console.log(currentPrice)
-
+  
       coinDetailsElement.innerHTML = `
       <h1>${info.name} Price</h1>
       <section class="coin-header">
@@ -99,6 +97,20 @@ function fetchDataAndRender() {
       document.querySelector(
         ".span-subtext.sell"
       ).textContent = `Sell ${info.symbol.toUpperCase()} for cash`;
+
+      document.querySelectorAll(".anchors a").forEach((a) => {
+        a.addEventListener("click", (_) => {
+          const coinData = {
+            name: info.name,
+            symbol: info.symbol,
+            image: coinImg,
+            buy: null
+          };
+
+          (a.id === "buy" ? coinData.buy = true: coinData.buy = false)
+          localStorage.setItem("tempCoinInfo", JSON.stringify(coinData));
+        });
+      });
 
       const cryptoGraph = () => {
         const canvas = document.querySelector(".canvas-graph");

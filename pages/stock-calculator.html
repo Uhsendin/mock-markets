@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/default.css" />
     <link rel="stylesheet" href="/styles/stock-calculator.css" />
+    <script src="/scripts/stock-calculator.js" defer></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -47,7 +48,7 @@
         <span>One-time order</span>
       </div>
       <section class="buy-sell">
-        <div class="pill"><span>Buy</span><span>Sell</span></div>
+        <div class="pill"><span id="buy">Buy</span><span id="sell">Sell</span></div>
         <div class="amount">
          <input type="number" placeholder="0">
          <span>USD</span>
@@ -62,7 +63,7 @@
           <img src="https://placehold.jp/150x150.png" alt="">
           <ul>
             <li>Buy</li>
-            <li>Bitcoin</li>
+            <li class="coin-name">Bitcoin</li>
           </ul>
         </div>
         <div class="lower">
