@@ -56,3 +56,60 @@ main {
 .coin-share span {
   color: #ee5246;
 }
+
+.balance-info {
+  margin-top: 3rem;
+}
+
+.upper,
+.lower {
+  margin-bottom: 2rem;
+}
+
+.upper {
+
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 3.5rem;
+}
+
+.upper img {
+  width: 30px;
+  border-radius: 50px;
+}
+
+.cash-symbol svg {
+  display: flex;
+  font-size: 3rem;
+  width: 30px;
+  margin: auto;
+  fill: #ee5246;
+}
+
+.lower {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.lower {
+  font-size: 3.5rem;
+}
+
+.lower span {
+  font-size: inherit;
+}
+
+.lower ul {
+  display: flex;
+  flex-direction: column;
+  width: 100%
+}
+
+.lower li {
+  display: flex;
+  justify-content: space-between;
+}
+
+
