@@ -105,7 +105,8 @@ function fetchDataAndRender() {
             symbol: info.symbol,
             image: coinImg,
             buy: null,
-            id: info.id
+            id: info.id,
+            price: currentPrice
           };
 
           (a.id === "buy" ? coinData.buy = true: coinData.buy = false)
