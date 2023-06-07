@@ -45,3 +45,13 @@ function getShareConversion(inputNum) {
 document.querySelector(".order-header a").addEventListener("click", () => {
   window.location.href = `/pages/crypto-details.html?coin=${coinDetailsParsed.id}`;
 });
+
+document.querySelector(".pill").addEventListener("click", e => {
+  if (e.target.id === "buy") {
+    document.getElementById("buy").classList.add("active-pill")
+    document.getElementById("sell").classList.remove("active-pill")
+  } else if (e.target.id === "sell") {
+    document.getElementById("sell").classList.add("active-pill")
+    document.getElementById("buy").classList.remove("active-pill")
+  }
+})
