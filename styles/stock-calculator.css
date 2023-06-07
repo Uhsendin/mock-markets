@@ -41,9 +41,14 @@ main {
 }
 .amount input {
   border: none;
-  width: 40px;
   font-size: 6rem;
 }
+.amount input:focus {
+  outline: none; 
+  border: none; 
+  cursor: none;
+}
+
 
 .amount span {
   font-size: 6rem;
