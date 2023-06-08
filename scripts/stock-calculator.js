@@ -5,7 +5,6 @@ const image = document.querySelector(".upper img");
 const coinName = document.querySelector(".coin-name");
 let shareNumAmount = 0;
 const numValue = document.querySelector(".amount input");
-numValue.style.width = "33px";
 
 coinShareSymbol.textContent = `${shareNumAmount} ${coinDetailsParsed.symbol.toUpperCase()}`;
 image.src = coinDetailsParsed.image;

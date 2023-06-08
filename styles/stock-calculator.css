@@ -13,6 +13,12 @@ main {
   font-size: inherit;
 }
 
+.order-header span {
+  background-color: rgb(56, 54, 54);
+  padding: 0.7rem 3rem;
+  border-radius: 3rem;
+}
+
 .buy-sell {
   margin-top: 5rem;
   display: flex;
@@ -25,11 +31,15 @@ main {
   background-color: rgb(56, 54, 54);
   border-radius: 3rem;
   width: min-content;
-  gap: 10px;
+  gap: 1rem;
 }
 .pill span {
   border-radius: 3rem;
   padding: 0.7rem 3rem;
+}
+
+.pill span:hover {
+  cursor: pointer;
 }
 
 .active-pill {
@@ -40,7 +50,7 @@ main {
   width: fit-content;
 }
 .amount input {
-  min-width: 33px;
+  width: 3.3rem;
   border: none;
   font-size: 6rem;
 }
@@ -58,7 +68,7 @@ main {
 .coin-share {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 1rem;
   font-size: 3rem;
 }
 
@@ -80,19 +90,18 @@ main {
 
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 1.5rem;
   font-size: 3.5rem;
 }
 
 .upper img {
-  width: 30px;
-  border-radius: 50px;
+  width: 3rem;
 }
 
 .cash-symbol svg {
   display: flex;
   font-size: 3rem;
-  width: 30px;
+  width: 3rem;
   margin: auto;
   fill: #ee5246;
 }
@@ -100,7 +109,7 @@ main {
 .lower {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 1.5rem;
 }
 
 .lower {
@@ -124,6 +133,18 @@ main {
 
 .coin-name {
   text-transform: capitalize;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 
