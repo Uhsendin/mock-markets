@@ -21,19 +21,15 @@ numValue.addEventListener("input", () => {
   const value = numValue.value;
   const minWidth = 33; // Minimum width of the input
 
-  if (valueLength === 1) {
-    numValue.style.width = "33px";
-    coinShareSymbol.textContent = `${(shareNumAmount =
-      getShareConversion(value))} ${coinDetailsParsed.symbol.toUpperCase()}`;
+  if (valueLength === 0) {
+    numValue.style.width = `${minWidth}px`;
+    coinShareSymbol.textContent = `${(shareNumAmount = 0)} ${coinDetailsParsed.symbol.toUpperCase()}`;
+    document.querySelector(".order-btn").style.display = "none";
   } else {
     numValue.style.width = `${minWidth * valueLength}px`;
     coinShareSymbol.textContent = `${(shareNumAmount =
       getShareConversion(value))} ${coinDetailsParsed.symbol.toUpperCase()}`;
-    if (valueLength > 1) {
-      document.querySelector(".order-btn").style.display = "block";
-    } else {
-      document.querySelector(".order-btn").style.display = "none";
-    }
+    document.querySelector(".order-btn").style.display = "block";
   }
 });
 
