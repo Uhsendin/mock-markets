@@ -147,4 +147,14 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-
+.order-btn{
+  display: none;
+  margin-top: 1.5rem;
+  background-color: #ee5246;
+  font-size: 2rem;
+  padding: 8px;
+  width: 100%;
+  border-radius: 75px;
+  border: none;
+  cursor: pointer;
+}

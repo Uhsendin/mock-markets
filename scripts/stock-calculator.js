@@ -5,6 +5,7 @@ const image = document.querySelector(".upper img");
 const coinName = document.querySelector(".coin-name");
 let shareNumAmount = 0;
 const numValue = document.querySelector(".amount input");
+let isbuy = coinDetailsParsed.buy;
 
 coinShareSymbol.textContent = `${shareNumAmount} ${coinDetailsParsed.symbol.toUpperCase()}`;
 image.src = coinDetailsParsed.image;
@@ -19,16 +20,20 @@ numValue.addEventListener("input", () => {
   const valueLength = numValue.value.length;
   const value = numValue.value;
   const minWidth = 33; // Minimum width of the input
-  
+
   if (valueLength === 1) {
     numValue.style.width = "33px";
     coinShareSymbol.textContent = `${(shareNumAmount =
       getShareConversion(value))} ${coinDetailsParsed.symbol.toUpperCase()}`;
   } else {
     numValue.style.width = `${minWidth * valueLength}px`;
-    coinShareSymbol.textContent = `${
-      shareNumAmount = getShareConversion(value)
-    } ${coinDetailsParsed.symbol.toUpperCase()}`;
+    coinShareSymbol.textContent = `${(shareNumAmount =
+      getShareConversion(value))} ${coinDetailsParsed.symbol.toUpperCase()}`;
+    if (valueLength > 1) {
+      document.querySelector(".order-btn").style.display = "block";
+    } else {
+      document.querySelector(".order-btn").style.display = "none";
+    }
   }
 });
 
@@ -45,12 +50,20 @@ document.querySelector(".order-header a").addEventListener("click", () => {
   window.location.href = `/pages/crypto-details.html?coin=${coinDetailsParsed.id}`;
 });
 
-document.querySelector(".pill").addEventListener("click", e => {
+document.querySelector(".pill").addEventListener("click", (e) => {
   if (e.target.id === "buy") {
-    document.getElementById("buy").classList.add("active-pill")
-    document.getElementById("sell").classList.remove("active-pill")
+    document.getElementById("buy").classList.add("active-pill");
+    document.getElementById("sell").classList.remove("active-pill");
+    isbuy = true;
   } else if (e.target.id === "sell") {
-    document.getElementById("sell").classList.add("active-pill")
-    document.getElementById("buy").classList.remove("active-pill")
+    document.getElementById("sell").classList.add("active-pill");
+    document.getElementById("buy").classList.remove("active-pill");
+    isbuy = false;
   }
-})
+});
+
+numValue.addEventListener("focus", (_) => {
+  document
+    .querySelector(".pill")
+    .scrollIntoView({ block: "start", behavior: "smooth" });
+});
