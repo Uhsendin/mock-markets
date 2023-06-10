@@ -3,8 +3,11 @@ const coinDetailsParsed = JSON.parse(coinDetails);
 const coinShareSymbol = document.querySelector(".coin-share span");
 const image = document.querySelector(".upper img");
 const coinName = document.querySelector(".coin-name");
-let shareNumAmount = 0;
 const numValue = document.querySelector(".amount input");
+const orderBtn = document.querySelector(".order-btn");
+const closeModal = document.querySelector(".close-modal");
+const modalOverlay = document.querySelector(".modal-overlay");
+let shareNumAmount = 0;
 let isbuy = coinDetailsParsed.buy;
 
 coinShareSymbol.textContent = `${shareNumAmount} ${coinDetailsParsed.symbol.toUpperCase()}`;
@@ -59,7 +62,28 @@ document.querySelector(".pill").addEventListener("click", (e) => {
 });
 
 numValue.addEventListener("focus", (_) => {
+  document.body.style.height = "150vh";
   document
     .querySelector(".pill")
     .scrollIntoView({ block: "start", behavior: "smooth" });
 });
+
+numValue.addEventListener("blur", (_) => {
+  setTimeout(() => {
+    document.body.style.height = "auto";
+  }, 0);
+});
+
+orderBtn.addEventListener("click", () => {
+    document.body.style.height = "auto"
+    modalOverlay.style.display = "block";
+ 
+});
+
+
+closeModal.addEventListener("click", () => {
+  modalOverlay.style.display = "none";
+  document.body.style.height = "auto";
+});
+
+
