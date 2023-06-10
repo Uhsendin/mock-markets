@@ -159,8 +159,7 @@ input[type=number] {
   cursor: pointer;
 }
 
-/* Modal styles */
-/* .modal-overlay {
+.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -171,7 +170,7 @@ input[type=number] {
   justify-content: center;
   z-index: 999;
   display: none; /* Hide the modal by default */
-} */
+}
 
 .modal {
   background-color: #fff;
