@@ -63,9 +63,11 @@ document.querySelector(".pill").addEventListener("click", (e) => {
 
 numValue.addEventListener("focus", (_) => {
   document.body.style.height = "150vh";
-  document
+  setTimeout(() => {
+    document
     .querySelector(".pill")
-    .scrollIntoView({ block: "start", behavior: "smooth" });
+    .scrollIntoView({ block: "start" });
+  }, 100);
 });
 
 numValue.addEventListener("blur", (_) => {
