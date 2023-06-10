@@ -66,7 +66,7 @@ numValue.addEventListener("focus", (_) => {
   setTimeout(() => {
     document
       .querySelector(".pill")
-      .scrollIntoView({ block: "start", behavior: "smooth" });
+      .scrollIntoView({ block: "start"});
   }, 100);
 });
 
@@ -94,22 +94,22 @@ function renderModalDetails() {
   document.querySelector(".modal-content img").src = coinDetailsParsed.image;
   document.querySelector(
     ".amount-text"
-  ).innerHTML = `Buy ${amountValue}<span class="usd">USD</span>`;
+  ).innerHTML = `Buy ${amountValue}<span class="usd"> USD</span>`;
   document.querySelector(
     ".coin-price"
-  ).textContent = `${coinDetailsParsed.symbol} price ${coinDetailsParsed.price}`;
+  ).textContent = `${coinDetailsParsed.symbol.toUpperCase()} price $${coinDetailsParsed.price}`;
   document.querySelector(
     ".pay-method"
-  ).innerHTML = `<span>Payment method</span><span>Nacho Banko</span>`;
+  ).innerHTML = `<span>Payment method</span><span class="text-color">Nacho Banko</span>`;
   document.querySelector(".amount-value").innerHTML = `<span>Amount in ${
     coinDetailsParsed.symbol
-  }</span>${(shareNumAmount = shareValue)} ${
-    coinDetailsParsed.symbol
-  }<span></span>`;
+  }</span><span class="text-color">${(shareNumAmount = shareValue)} ${
+    coinDetailsParsed.symbol.toUpperCase()
+  }</span>`;
   document.querySelector(
     ".fee"
-  ).innerHTML = `<span>Coin fee</span><span>$0.00</span>`;
+  ).innerHTML = `<span>Coin fee</span><span class="text-color">$0.00</span>`;
   document.querySelector(
     ".total"
-  ).innerHTML = `<span>Total</span><span>${amountValue}</span>`;
+  ).innerHTML = `<span>Total</span><span>$${amountValue}</span>`;
 }

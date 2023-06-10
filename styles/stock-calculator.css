@@ -55,11 +55,10 @@ main {
   font-size: 6rem;
 }
 .amount input:focus {
-  outline: none; 
-  border: none; 
+  outline: none;
+  border: none;
   cursor: none;
 }
-
 
 .amount span {
   font-size: 6rem;
@@ -87,7 +86,6 @@ main {
 }
 
 .upper {
-
   display: flex;
   align-items: center;
   gap: 1.5rem;
@@ -123,7 +121,7 @@ main {
 .lower ul {
   display: flex;
   flex-direction: column;
-  width: 100%
+  width: 100%;
 }
 
 .lower li {
@@ -143,11 +141,11 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
-.order-btn{
+.order-btn {
   display: none;
   margin-top: 1.5rem;
   background-color: #ee5246;
@@ -173,34 +171,72 @@ input[type=number] {
 }
 
 .modal {
-  background-color: #fff;
+  background-color: #292c2c;
   width: 100%;
   height: 100%;
   padding: 20px;
   border-radius: 5px;
 }
 
-.modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.modal-header h2 {
-  margin: 0;
-}
-
 .close-modal {
-  font-size: 24px;
-  color: black;
+  font-size: 3rem;
+  color: white;
   cursor: pointer;
 }
 
-.modal-content * {
-  /* Add any additional styling for the modal content */
-  color: black;
-  font-size: 2rem;
+.close-modal a i {
+  font-size: inherit;
 }
 
+.modal-content {
+  margin-top: 2rem;
+}
+.modal-content * {
+  color: white;
+}
+.modal-header * {
+  font-size: 3rem;
+}
 
+.modal-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+.modal-header img {
+  width: 5rem;
+  margin-bottom: 1rem;
+}
+
+.usd {
+  color: #6d7272;
+  font-size: 3rem;
+}
+
+.coin-price {
+  font-size: 2.5rem;
+  color: #6d7272;
+}
+
+.place-order * {
+  font-size: 1.7rem;
+}
+
+.place-order {
+  border-top: 1px solid #6d7272;
+  padding-top: 2rem;
+}
+
+.pay-method,
+.amount-value,
+.fee,
+.total {
+  display: flex;
+  justify-content: space-between;
+}
+
+.text-color {
+  color: #6d7272;
+}
