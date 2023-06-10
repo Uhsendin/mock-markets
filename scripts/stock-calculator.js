@@ -65,8 +65,8 @@ numValue.addEventListener("focus", (_) => {
   document.body.style.height = "150vh";
   setTimeout(() => {
     document
-    .querySelector(".pill")
-    .scrollIntoView({ block: "start" });
+      .querySelector(".pill")
+      .scrollIntoView({ block: "start", behavior: "smooth" });
   }, 100);
 });
 
@@ -77,15 +77,39 @@ numValue.addEventListener("blur", (_) => {
 });
 
 orderBtn.addEventListener("click", () => {
-    document.body.style.height = "auto"
-    modalOverlay.style.display = "block";
- 
+  renderModalDetails();
+  document.body.style.height = "auto";
+  modalOverlay.style.display = "block";
 });
-
 
 closeModal.addEventListener("click", () => {
   modalOverlay.style.display = "none";
   document.body.style.height = "auto";
 });
 
+function renderModalDetails() {
+  const amountValue = parseFloat(numValue.value).toFixed(2);
+  const shareValue = getShareConversion(numValue.value)
 
+  document.querySelector(".modal-content img").src = coinDetailsParsed.image;
+  document.querySelector(
+    ".amount-text"
+  ).innerHTML = `Buy ${amountValue}<span class="usd">USD</span>`;
+  document.querySelector(
+    ".coin-price"
+  ).textContent = `${coinDetailsParsed.symbol} price ${coinDetailsParsed.price}`;
+  document.querySelector(
+    ".pay-method"
+  ).innerHTML = `<span>Payment method</span><span>Nacho Banko</span>`;
+  document.querySelector(".amount-value").innerHTML = `<span>Amount in ${
+    coinDetailsParsed.symbol
+  }</span>${(shareNumAmount = shareValue)} ${
+    coinDetailsParsed.symbol
+  }<span></span>`;
+  document.querySelector(
+    ".fee"
+  ).innerHTML = `<span>Coin fee</span><span>$0.00</span>`;
+  document.querySelector(
+    ".total"
+  ).innerHTML = `<span>Total</span><span>${amountValue}</span>`;
+}

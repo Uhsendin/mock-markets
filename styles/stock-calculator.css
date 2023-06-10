@@ -197,9 +197,10 @@ input[type=number] {
   cursor: pointer;
 }
 
-.modal-content p {
+.modal-content * {
   /* Add any additional styling for the modal content */
   color: black;
+  font-size: 2rem;
 }
 
 
