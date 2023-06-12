@@ -1,3 +1,4 @@
+import { CoinOrder } from "./crypto-shares.js";
 const coinDetails = localStorage.getItem("tempCoinInfo");
 const coinDetailsParsed = JSON.parse(coinDetails);
 const coinShareSymbol = document.querySelector(".coin-share span");
@@ -64,9 +65,7 @@ document.querySelector(".pill").addEventListener("click", (e) => {
 numValue.addEventListener("focus", (_) => {
   document.body.style.height = "150vh";
   setTimeout(() => {
-    document
-      .querySelector(".pill")
-      .scrollIntoView({ block: "start"});
+    document.querySelector(".pill").scrollIntoView({ block: "start" });
   }, 100);
 });
 
@@ -89,7 +88,7 @@ closeModal.addEventListener("click", () => {
 
 function renderModalDetails() {
   const amountValue = parseFloat(numValue.value).toFixed(2);
-  const shareValue = getShareConversion(numValue.value)
+  const shareValue = getShareConversion(numValue.value);
 
   document.querySelector(".modal-content img").src = coinDetailsParsed.image;
   document.querySelector(
@@ -97,15 +96,16 @@ function renderModalDetails() {
   ).innerHTML = `Buy ${amountValue}<span class="usd"> USD</span>`;
   document.querySelector(
     ".coin-price"
-  ).textContent = `${coinDetailsParsed.symbol.toUpperCase()} price $${coinDetailsParsed.price}`;
+  ).textContent = `${coinDetailsParsed.symbol.toUpperCase()} price $${
+    coinDetailsParsed.price
+  }`;
   document.querySelector(
     ".pay-method"
-  ).innerHTML = `<span>Payment method</span><span class="text-color">Nacho Banko</span>`;
-  document.querySelector(".amount-value").innerHTML = `<span>Amount in ${
-    coinDetailsParsed.symbol
-  }</span><span class="text-color">${(shareNumAmount = shareValue)} ${
-    coinDetailsParsed.symbol.toUpperCase()
-  }</span>`;
+  ).innerHTML = `<span>Payment method</span><span class="text-color">Nacho Banco</span>`;
+  document.querySelector(
+    ".amount-value"
+  ).innerHTML = `<span>Amount in ${coinDetailsParsed.symbol.toUpperCase()}</span><span class="text-color">${(shareNumAmount =
+    shareValue)} ${coinDetailsParsed.symbol.toUpperCase()}</span>`;
   document.querySelector(
     ".fee"
   ).innerHTML = `<span>Coin fee</span><span class="text-color">$0.00</span>`;
@@ -113,3 +113,34 @@ function renderModalDetails() {
     ".total"
   ).innerHTML = `<span>Total</span><span>$${amountValue}</span>`;
 }
+
+document.querySelector(".place-order-btn").addEventListener("click", (_) => {
+  const amountValue = parseFloat(numValue.value).toFixed(2);
+  const shareValue = getShareConversion(numValue.value);
+  const currentDate = new Date();
+  let portfolio = {}
+  const formattedDate = currentDate
+    .toISOString()
+    .slice(0, 19)
+    .replace("T", " ");
+
+    if (localStorage.getItem("portfolio")) {
+      portfolio = JSON.parse(localStorage.getItem("portfolio"))
+    }
+  const order = new CoinOrder(
+    coinDetailsParsed.id,
+    coinDetailsParsed.symbol,
+    formattedDate,
+    shareValue,
+    amountValue
+  );
+
+if (!portfolio[order.id]) {
+  portfolio[order.id] = []
+}
+
+  portfolio[order.id].push(order)
+  localStorage.setItem("portfolio", JSON.stringify(portfolio))
+  window.location.href = `/pages/crypto-details.html?coin=${coinDetailsParsed.id}`;
+  
+});
