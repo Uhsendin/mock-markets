@@ -10,6 +10,8 @@ const closeModal = document.querySelector(".close-modal");
 const modalOverlay = document.querySelector(".modal-overlay");
 let shareNumAmount = 0;
 let isbuy = coinDetailsParsed.buy;
+const accountBalanceElm = document.querySelector(".available-cash")
+accountBalanceElm.textContent = localStorage.getItem("accountBalance")
 
 coinShareSymbol.textContent = `${shareNumAmount} ${coinDetailsParsed.symbol.toUpperCase()}`;
 image.src = coinDetailsParsed.image;
@@ -117,6 +119,7 @@ function renderModalDetails() {
 document.querySelector(".place-order-btn").addEventListener("click", (_) => {
   const amountValue = parseFloat(numValue.value).toFixed(2);
   const shareValue = getShareConversion(numValue.value);
+  const availableCash = JSON.parse(localStorage.getItem("accountBalance"))
   const currentDate = new Date();
   let portfolio = {}
   const formattedDate = currentDate
@@ -141,6 +144,18 @@ if (!portfolio[order.id]) {
 
   portfolio[order.id].push(order)
   localStorage.setItem("portfolio", JSON.stringify(portfolio))
+updateAccountBalance(availableCash, amountValue)
+
+
   window.location.href = `/pages/crypto-details.html?coin=${coinDetailsParsed.id}`;
   
 });
+
+const updateAccountBalance = (balance, amountValue) => {
+  let result = balance - amountValue
+  localStorage.setItem("accountBalance", result)
+}
+
+
+
+

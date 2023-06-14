@@ -7,10 +7,6 @@
         this.sharesBought = sharesBought
         this.priceBought = priceBought
     }  
-
-    
-     
-
 }
 
 
