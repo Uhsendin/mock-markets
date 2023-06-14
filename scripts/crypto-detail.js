@@ -25,6 +25,20 @@ function fetchDataAndRender() {
       const marketCap = info.market_data.market_cap.usd;
       const volume = info.market_data.total_volume.usd;
       const coinSupply = info.market_data.circulating_supply;
+      const coinBalance = JSON.parse(localStorage.getItem("portfolio"))
+
+      const getTotalCoinAmount = (coin) => {
+        const totalSum = []
+        if(coinBalance === null) {
+          return 0
+        }
+        coin[info.id].forEach(elm => {
+          totalSum.push(Number(elm.totalAmountBought))
+        })
+        return totalSum.reduce((acc,curVal) => acc + curVal, 0)
+      }
+      
+
   
       coinDetailsElement.innerHTML = `
       <h1>${info.name} Price</h1>
@@ -53,7 +67,7 @@ function fetchDataAndRender() {
               </div>
             </div>
             <div class="coin-shares">
-              <p>$10,000</p>
+              <p>$${getTotalCoinAmount(coinBalance).toLocaleString()}</p>
               <p>$-1,304</p>
               </div>
               </div>

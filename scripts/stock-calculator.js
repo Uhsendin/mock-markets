@@ -120,6 +120,8 @@ document.querySelector(".place-order-btn").addEventListener("click", (_) => {
   const amountValue = parseFloat(numValue.value).toFixed(2);
   const shareValue = getShareConversion(numValue.value);
   const availableCash = JSON.parse(localStorage.getItem("accountBalance"))
+  const curentPrice = JSON.parse(localStorage.getItem("tempCoinInfo")).price
+  
   const currentDate = new Date();
   let portfolio = {}
   const formattedDate = currentDate
@@ -130,13 +132,21 @@ document.querySelector(".place-order-btn").addEventListener("click", (_) => {
     if (localStorage.getItem("portfolio")) {
       portfolio = JSON.parse(localStorage.getItem("portfolio"))
     }
+  // const order = new CoinOrder(
+  //   coinDetailsParsed.id,
+  //   coinDetailsParsed.symbol,
+  //   formattedDate,
+  //   shareValue,
+  //   amountValue
+  // );
   const order = new CoinOrder(
     coinDetailsParsed.id,
     coinDetailsParsed.symbol,
     formattedDate,
     shareValue,
+    curentPrice,
     amountValue
-  );
+  )
 
 if (!portfolio[order.id]) {
   portfolio[order.id] = []
