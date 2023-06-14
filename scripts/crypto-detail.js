@@ -29,7 +29,7 @@ function fetchDataAndRender() {
 
       const getTotalCoinAmount = (coin) => {
         const totalSum = []
-        if(coinBalance === null) {
+        if (!coinBalance || coinBalance[info.id] === undefined) {
           return 0
         }
         coin[info.id].forEach(elm => {
