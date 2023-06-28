@@ -6,11 +6,13 @@
     padding: 0;
     list-style: none;
     line-height: 1.5;
-    color: #ffffff;
+    /* color: #ffffff; */
+    color: black;
     font-family: "Roboto", sans-serif;
   }
   body, .hamburger,input,button {
-    background-color: #292c2c;
+    /* background-color: #292c2c; */
+    background: #ffffff;
   }
   
   .container {
@@ -28,13 +30,14 @@
   
   .container h1 a,
   .container button i {
-    color: #ee5246;
+    /* color: #ee5246; */
+    color: black;
   }
   .container h1 a:hover,
   .container h1 a:focus,
   .container button i:hover,
   .container button i:focus {
-    color: #ffffff;
+    color: black;
   }
   
   button {
@@ -76,7 +79,8 @@
     padding: 8px;
     text-decoration: none;
     font-size: 36px;
-    color: #ee5246;
+    /* color: #ee5246; */
+    color: black;
     display: block;
     transition: 0.3s;
     text-transform: capitalize;
@@ -86,6 +90,7 @@
   nav i:hover,
   nav a:focus,
   nav i:focus {
-    color: #ffffff;
+    color: rgb(56, 97, 251);
+    
   }
   

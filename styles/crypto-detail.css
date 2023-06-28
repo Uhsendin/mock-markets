@@ -5,7 +5,8 @@ body {
 h1,
 .balance-title {
   font-size: 1.3rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: black;
+  font-weight: 500;
 }
 
 .balance-title {
@@ -26,11 +27,11 @@ main {
 }
 .coin-current button i {
   font-size: 4rem;
-  color: #ee5246;
+  color: rgb(56, 97, 251)
 }
 .coin-current button i:hover {
   font-size: 4.5rem;
-  color: #d4716a;
+  color: rgb(71, 102, 217)
 }
 
 .coin-balance {
@@ -40,7 +41,8 @@ main {
 }
 
 .negative {
-  color: rgb(249, 62, 62);
+  color: #ea3943;
+  font-weight: 500;
 }
 .positive {
   color: green;
@@ -89,12 +91,13 @@ main {
 .coin-des a {
   font-size: inherit;
   text-decoration: none;
-  color: #ee5246;
+  color: rgb(56, 97, 251);
+  font-weight: 700;
 }
 
 .coin-des a:hover,
 .coin-des a:focus {
-  color: #d4716a;
+  color: rgb(63, 95, 214);
 }
 
 .coin-des.expand {
@@ -102,13 +105,14 @@ main {
 }
 
 .view-more {
-  color: #ee5246;
+  color: rgb(56, 97, 251);
+  font-weight: 700;
   font-size: 1.5rem;
 }
 
 .trade {
   margin-top: 1.5rem;
-  background-color: #ee5246;
+  background-color: rgb(56, 97, 251);
   font-size: 2rem;
   padding: 8px;
   width: 100%;
@@ -123,13 +127,13 @@ main {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(255, 255, 255, 0.8);
   align-items: flex-end;
   justify-content: center;
 }
 
 .modal-content {
-  background-color: #292c2c;
+  background-color: rgb(152, 152, 152);
   padding: 20px;
   width: 100%;
   height: 50%;

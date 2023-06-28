@@ -149,7 +149,7 @@ function fetchDataAndRender() {
           data.labels = labels;
           data.datasets[0].data = sparkLineCurrentDay;
           data.datasets[0].pointRadius = 1;
-          data.datasets[0].borderColor = coin24High < 0 ? "red" : "green";
+          data.datasets[0].borderColor = coin24High < 0 ? "#ea3943" : "#16c784";
           config.options.plugins.tooltip.enabled = true;
           config.options.plugins.tooltip.mode = "index";
           config.options.plugins.tooltip.intersect = false;

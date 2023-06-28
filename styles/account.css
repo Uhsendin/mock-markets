@@ -29,7 +29,7 @@ main {
 
 .column-form input[type="button"] {
   border-radius: 20px;
-  background-color: #ee5246;
+  background-color: rgb(56, 97, 251);;
   border: none;
   height: 35px;
   font-size: 2rem;
@@ -38,7 +38,7 @@ main {
 
 .column-form input[type="button"]:hover,
 .column-form input[type="button"]:focus {
-    background-color: #d4716a;
+    background-color: rgb(56, 97, 251);
 }
 
 
@@ -47,7 +47,7 @@ main {
 .column-form input[type="email"] {
   height: 30px;
   border: none;
-  border-bottom: solid 1px white;
+  border-bottom: solid 1px black;
   font-size: 1.5rem;
 }
 .column-form input[type="password"]::-webkit-input-placeholder {
@@ -64,13 +64,13 @@ main {
 }
 
 .form-options .forgot-pass a{
-    color: #ee5246;
+    color: rgb(56, 97, 251);
     text-decoration: none;
 }
 
 .form-options .forgot-pass a:hover,
 .form-options .forgot-pass a:focus{
-    color: #d4716a;
+    color: rgb(63, 95, 214);
 }
 
 .remember {
@@ -87,9 +87,11 @@ main {
 .signup a {
     font-size: inherit;
     text-decoration: none;
-    color: #ee5246;
+    color: rgb(56, 97, 251);
+    
 }
 .signup a:hover,
 .signup a:focus {
-    color: #d4716a;
+  color: rgb(63, 95, 214);
+    
 }
