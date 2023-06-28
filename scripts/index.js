@@ -71,7 +71,7 @@ window.onload = function () {
   fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd")
     .then((res) => res.json())
     .then((data) => {
-      for (let i = 0; i < 15; i++) {
+      for (let i = 0; i < 25; i++) {
         const coin = new Coin(
           data[i].name,
           data[i].symbol,

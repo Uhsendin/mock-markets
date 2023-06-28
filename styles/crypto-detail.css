@@ -45,7 +45,7 @@ main {
   font-weight: 500;
 }
 .positive {
-  color: green;
+  color: #16c784;
 }
 
 .your-balance {
@@ -115,6 +115,7 @@ main {
   background-color: rgb(56, 97, 251);
   font-size: 2rem;
   padding: 8px;
+  color: white;
   width: 100%;
   border-radius: 75px;
 }

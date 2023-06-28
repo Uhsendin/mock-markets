@@ -13,7 +13,7 @@
 
 .header i {
   font-size: 2rem;
-  color: #ffffff;
+  color: black
 }
 
 .delete p {
@@ -26,7 +26,7 @@
 .header i:focus,
 .delete p:hover,
 .delete p:focus {
-  color: #cec7c7;
+  color: #757575;
   cursor: pointer;
 }
 
@@ -53,7 +53,7 @@
 }
 
 .coin:hover{
-  background-color: #343636;
+  background-color: rgb(222, 222, 222);
   cursor: pointer;
 }
 .coin span {
@@ -73,7 +73,7 @@
 
 .coin-name span {
   text-transform: uppercase;
-  color: #b8b7b7;
+  color: rgb(65, 63, 63);
 }
 
 .coin-prices {
@@ -112,11 +112,13 @@
 }
 
 .positive {
-  color: rgb(62, 167, 62);
+  color: #16c784;
+  font-weight: 500;
 }
 
 .negative {
-  color: rgb(243, 29, 29);
+  color: #ea3943;
+  font-weight: 500;
 }
 
 canvas {

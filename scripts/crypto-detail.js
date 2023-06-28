@@ -1,9 +1,9 @@
-import { data, config, labels } from "./stock-chart.js";
+import { data, config, labels } from './stock-chart.js';
 
 function fetchDataAndRender() {
   // Get coin name from URL parameters
   const urlParams = new URLSearchParams(window.location.search);
-  const coinName = urlParams.get("coin");
+  const coinName = urlParams.get('coin');
 
   // Fetch data from API
   fetch(
@@ -12,7 +12,7 @@ function fetchDataAndRender() {
     .then((res) => res.json())
     .then((info) => {
       // Render coin details on the page
-      const coinDetailsElement = document.getElementById("coin-details");
+      const coinDetailsElement = document.getElementById('coin-details');
       const coin24High = info.market_data.price_change_percentage_24h;
       const sparklineList = info.market_data.sparkline_7d.price;
       const sparkLineCurrentDay = sparklineList.slice(-24);
@@ -25,35 +25,41 @@ function fetchDataAndRender() {
       const marketCap = info.market_data.market_cap.usd;
       const volume = info.market_data.total_volume.usd;
       const coinSupply = info.market_data.circulating_supply;
-      const coinBalance = JSON.parse(localStorage.getItem("portfolio"))
+      const coinBalance = JSON.parse(localStorage.getItem('portfolio'));
 
-      const getTotalCoinAmount = (coin) => {
+      const getTotalCoinAmount = (coin, netgainBool) => {
         let userTotalSum = 0;
         const shareAmount = [];
         if (!coinBalance || coinBalance[info.id] === undefined) {
           return 0;
         }
-        
+
         coin[info.id].forEach((elm) => {
           userTotalSum += Number(elm.totalAmountBought);
           shareAmount.push(elm.sharesBought);
         });
-      
-        const totalShares = shareAmount.reduce((acc, curVal) => acc + curVal, 0);
+
+        const totalShares = shareAmount.reduce(
+          (acc, curVal) => acc + curVal,
+          0
+        );
         const currentMarketTotal = totalShares * currentPrice;
         const netGainLoss = userTotalSum - currentMarketTotal;
-        
-        console.log("Total Amount Bought:", userTotalSum);
-        console.log("Current Market Total:", Number(currentMarketTotal.toFixed(2)));
-        console.log("Net Gain/Loss:", netGainLoss);
-        
-        return netGainLoss;
-         
-      }
-      getTotalCoinAmount(coinBalance)
-      
 
-  
+        // console.log('Total Amount Bought:', userTotalSum);
+        // console.log(
+        //   'Current Market Total:',
+        //   Number(currentMarketTotal.toFixed(2))
+        // );
+        // console.log('Net Gain/Loss:', netGainLoss);
+
+        if (netgainBool) {
+          return netGainLoss;
+        } else {
+          return currentMarketTotal;
+        }
+      };
+
       coinDetailsElement.innerHTML = `
       <h1>${info.name} Price</h1>
       <section class="coin-header">
@@ -62,7 +68,7 @@ function fetchDataAndRender() {
           <button class="wishlist-btn"><i class="fa-solid fa-plus"></i></button>
         </div>
         <p class="${
-          PriceChange24h >= 0 ? "positive" : "negative"
+          PriceChange24h >= 0 ? 'positive' : 'negative'
         }">$${PriceChange24h.toFixed(2)} (${coin24High.toFixed(2)}%)</p>
       </section>
       <section class="coin-graph">
@@ -71,7 +77,7 @@ function fetchDataAndRender() {
       <section class="coin-info">
         <div class="your-balance">
           <p class="balance-title">Your balance</p>
-          <p class="balance">$${localStorage.getItem("accountBalance")}</p>
+          <p class="balance">$${localStorage.getItem('accountBalance')}</p>
           <div class="coin-balance">
             <div class="coin-primary-balance">
               <img src="${coinImg}" alt="${coinTitle}">
@@ -81,8 +87,22 @@ function fetchDataAndRender() {
               </div>
             </div>
             <div class="coin-shares">
-              <p>$212</p>
-              <p>$-1,304</p>
+              <p>$${
+                coinBalance === null
+                  ? '0'
+                  : getTotalCoinAmount(coinBalance, false).toFixed(2)
+              }</p>
+              <p class="${
+                coinBalance === null
+                  ? ''
+                  : getTotalCoinAmount(coinBalance, true) < 0
+                  ? 'negative'
+                  : 'positive'
+              }">$${
+        coinBalance === null
+          ? '0'
+          : getTotalCoinAmount(coinBalance, true).toFixed(2)
+      }</p>
               </div>
               </div>
               <button class="trade" id="trade">Trade</button>
@@ -99,7 +119,7 @@ function fetchDataAndRender() {
           ${
             coinDes.length !== 0
               ? ` <button class="view-more">View more</button>`
-              : ""
+              : ''
           }
          
         </section>
@@ -114,81 +134,78 @@ function fetchDataAndRender() {
       `;
 
       document.querySelector(
-        ".span-header.buy"
+        '.span-header.buy'
       ).textContent = `Buy ${info.symbol.toUpperCase()}`;
       document.querySelector(
-        ".span-subtext.buy"
+        '.span-subtext.buy'
       ).textContent = `Buy ${info.symbol.toUpperCase()} with cash`;
       document.querySelector(
-        ".span-header.sell"
+        '.span-header.sell'
       ).textContent = `Sell ${info.symbol.toUpperCase()}`;
       document.querySelector(
-        ".span-subtext.sell"
+        '.span-subtext.sell'
       ).textContent = `Sell ${info.symbol.toUpperCase()} for cash`;
 
-      document.querySelectorAll(".anchors a").forEach((a) => {
-        a.addEventListener("click", (_) => {
+      document.querySelectorAll('.anchors a').forEach((a) => {
+        a.addEventListener('click', (_) => {
           const coinData = {
             name: info.name,
             symbol: info.symbol,
             image: coinImg,
             buy: null,
             id: info.id,
-            price: currentPrice
+            price: currentPrice,
           };
 
-          (a.id === "buy" ? coinData.buy = true: coinData.buy = false)
-          localStorage.setItem("tempCoinInfo", JSON.stringify(coinData));
+          a.id === 'buy' ? (coinData.buy = true) : (coinData.buy = false);
+          localStorage.setItem('tempCoinInfo', JSON.stringify(coinData));
         });
       });
 
       const cryptoGraph = () => {
-        const canvas = document.querySelector(".canvas-graph");
+        const canvas = document.querySelector('.canvas-graph');
         console.log();
         if (canvas) {
           data.labels = labels;
           data.datasets[0].data = sparkLineCurrentDay;
           data.datasets[0].pointRadius = 1;
-          data.datasets[0].borderColor = coin24High < 0 ? "#ea3943" : "#16c784";
+          data.datasets[0].borderColor = coin24High < 0 ? '#ea3943' : '#16c784';
           config.options.plugins.tooltip.enabled = true;
-          config.options.plugins.tooltip.mode = "index";
+          config.options.plugins.tooltip.mode = 'index';
           config.options.plugins.tooltip.intersect = false;
-          config.options.scales.x.display = true;
-          config.options.scales.y.display = true;
-
-          const ctx = canvas.getContext("2d");
+          const ctx = canvas.getContext('2d');
           new Chart(ctx, config);
         }
       };
       cryptoGraph();
 
-      const openModalBtn = document.getElementById("trade");
-      const modal = document.getElementById("modal");
-      const closeModal = document.getElementsByClassName("close")[0];
+      const openModalBtn = document.getElementById('trade');
+      const modal = document.getElementById('modal');
+      const closeModal = document.getElementsByClassName('close')[0];
 
-      openModalBtn.addEventListener("click", function () {
-        modal.style.display = "block";
-        document.body.classList.add("modal-open");
+      openModalBtn.addEventListener('click', function () {
+        modal.style.display = 'block';
+        document.body.classList.add('modal-open');
       });
 
-      closeModal.addEventListener("click", function () {
-        modal.style.display = "none";
-        document.body.classList.remove("modal-open");
+      closeModal.addEventListener('click', function () {
+        modal.style.display = 'none';
+        document.body.classList.remove('modal-open');
       });
 
       // Attach event listeners
       if (coinDes.length !== 0) {
         const attachEventListeners = () => {
           // Event listener for "View more" button
-          const btnViewMore = document.querySelector(".view-more");
-          btnViewMore.addEventListener("click", function () {
-            const paragraph = document.querySelector(".coin-des");
-            paragraph.classList.toggle("expand");
+          const btnViewMore = document.querySelector('.view-more');
+          btnViewMore.addEventListener('click', function () {
+            const paragraph = document.querySelector('.coin-des');
+            paragraph.classList.toggle('expand');
 
-            if (btnViewMore.textContent === "View more") {
-              btnViewMore.textContent = "View less";
+            if (btnViewMore.textContent === 'View more') {
+              btnViewMore.textContent = 'View less';
             } else {
-              btnViewMore.textContent = "View more";
+              btnViewMore.textContent = 'View more';
             }
           });
         };
@@ -197,15 +214,15 @@ function fetchDataAndRender() {
       }
 
       // Make all links within .coin-des open in new tabs
-      const coinDesLinks = document.querySelectorAll(".coin-des a");
+      const coinDesLinks = document.querySelectorAll('.coin-des a');
       coinDesLinks.forEach((link) => {
-        link.setAttribute("target", "_blank");
+        link.setAttribute('target', '_blank');
       });
 
-      const wishlistBtn = document.querySelector(".wishlist-btn");
+      const wishlistBtn = document.querySelector('.wishlist-btn');
 
-      wishlistBtn.addEventListener("click", function () {
-        let selectedCryptos = localStorage.getItem("selectedCryptos");
+      wishlistBtn.addEventListener('click', function () {
+        let selectedCryptos = localStorage.getItem('selectedCryptos');
         selectedCryptos = selectedCryptos ? JSON.parse(selectedCryptos) : [];
 
         const crypto = { id: info.id };
@@ -213,7 +230,7 @@ function fetchDataAndRender() {
         if (!selectedCryptos.some((c) => c.id === crypto.id)) {
           selectedCryptos.push(crypto);
           localStorage.setItem(
-            "selectedCryptos",
+            'selectedCryptos',
             JSON.stringify(selectedCryptos)
           );
         }
@@ -221,4 +238,4 @@ function fetchDataAndRender() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", fetchDataAndRender);
+document.addEventListener('DOMContentLoaded', fetchDataAndRender);

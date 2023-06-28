@@ -37,7 +37,7 @@
   .container h1 a:focus,
   .container button i:hover,
   .container button i:focus {
-    color: black;
+    color: #757575;
   }
   
   button {
