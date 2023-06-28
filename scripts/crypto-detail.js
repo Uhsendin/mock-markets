@@ -28,15 +28,29 @@ function fetchDataAndRender() {
       const coinBalance = JSON.parse(localStorage.getItem("portfolio"))
 
       const getTotalCoinAmount = (coin) => {
-        const totalSum = []
+        let userTotalSum = 0;
+        const shareAmount = [];
         if (!coinBalance || coinBalance[info.id] === undefined) {
-          return 0
+          return 0;
         }
-        coin[info.id].forEach(elm => {
-          totalSum.push(Number(elm.totalAmountBought))
-        })
-        return totalSum.reduce((acc,curVal) => acc + curVal, 0)
+        
+        coin[info.id].forEach((elm) => {
+          userTotalSum += Number(elm.totalAmountBought);
+          shareAmount.push(elm.sharesBought);
+        });
+      
+        const totalShares = shareAmount.reduce((acc, curVal) => acc + curVal, 0);
+        const currentMarketTotal = totalShares * currentPrice;
+        const netGainLoss = userTotalSum - currentMarketTotal;
+        
+        console.log("Total Amount Bought:", userTotalSum);
+        console.log("Current Market Total:", Number(currentMarketTotal.toFixed(2)));
+        console.log("Net Gain/Loss:", netGainLoss);
+        
+        return netGainLoss;
+         
       }
+      getTotalCoinAmount(coinBalance)
       
 
   
@@ -67,7 +81,7 @@ function fetchDataAndRender() {
               </div>
             </div>
             <div class="coin-shares">
-              <p>$${getTotalCoinAmount(coinBalance).toLocaleString()}</p>
+              <p>$212</p>
               <p>$-1,304</p>
               </div>
               </div>
