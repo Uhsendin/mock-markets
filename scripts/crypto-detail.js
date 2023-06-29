@@ -44,14 +44,13 @@ function fetchDataAndRender() {
           0
         );
         const currentMarketTotal = totalShares * currentPrice;
-        const netGainLoss =  currentMarketTotal - userTotalSum;
-console.log(totalShares)
-        console.log('Total Amount Bought:', userTotalSum);
-        console.log(
-          'Current Market Total:',
-          Number(currentMarketTotal.toFixed(2))
-        );
-        console.log('Net Gain/Loss:', netGainLoss);
+        const netGainLoss = currentMarketTotal - userTotalSum;
+        // console.log('Total Amount Bought:', userTotalSum);
+        // console.log(
+        //   'Current Market Total:',
+        //   Number(currentMarketTotal.toFixed(2))
+        // );
+        // console.log('Net Gain/Loss:', netGainLoss);
 
         if (netgainBool) {
           return netGainLoss;
@@ -77,7 +76,9 @@ console.log(totalShares)
       <section class="coin-info">
         <div class="your-balance">
           <p class="balance-title">Your balance</p>
-          <p class="balance">$${localStorage.getItem('accountBalance')}</p>
+          <p class="balance">$${Number(
+            localStorage.getItem('accountBalance')
+          ).toLocaleString()}</p>
           <div class="coin-balance">
             <div class="coin-primary-balance">
               <img src="${coinImg}" alt="${coinTitle}">
@@ -90,12 +91,18 @@ console.log(totalShares)
               <p>$${
                 coinBalance === null
                   ? '0.00'
-                  : getTotalCoinAmount(coinBalance, false).toFixed(2)
+                  : getTotalCoinAmount(coinBalance, false).toLocaleString(
+                      undefined,
+                      { minimumFractionDigits: 2, maximumFractionDigits: 2 }
+                    )
               }</p>
               <p class="net">$${
                 coinBalance === null
                   ? '0.00'
-                  : getTotalCoinAmount(coinBalance, true).toFixed(2)
+                  : getTotalCoinAmount(coinBalance, true).toLocaleString(
+                      undefined,
+                      { minimumFractionDigits: 2, maximumFractionDigits: 2 }
+                    )
               }</p>
               </div>
               </div>
@@ -127,14 +134,12 @@ console.log(totalShares)
       </section>
       `;
 
+      const net = document.querySelector('.net');
 
-      const net = document.querySelector(".net")
-        
-      if (net.textContent.includes("-")) {
-        net.classList.add("negative")
-      } else if (net.textContent !== "$0.00") {
-        net.classList.add("positive")
-        
+      if (net.textContent.includes('-')) {
+        net.classList.add('negative');
+      } else if (net.textContent !== '$0.00') {
+        net.classList.add('positive');
       }
 
       document.querySelector(
@@ -152,6 +157,13 @@ console.log(totalShares)
 
       document.querySelectorAll('.anchors a').forEach((a) => {
         a.addEventListener('click', (_) => {
+          if (parseInt(localStorage.getItem('accountBalance')) <= 0) {
+            alert(
+              'Your account balance is low. Redirecting to top off balance!'
+            );
+            document.querySelector('.buy-coin').href = '/pages/balance.html';
+          }
+
           const coinData = {
             name: info.name,
             symbol: info.symbol,
