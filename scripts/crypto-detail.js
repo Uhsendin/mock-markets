@@ -44,14 +44,14 @@ function fetchDataAndRender() {
           0
         );
         const currentMarketTotal = totalShares * currentPrice;
-        const netGainLoss = userTotalSum - currentMarketTotal;
-
-        // console.log('Total Amount Bought:', userTotalSum);
-        // console.log(
-        //   'Current Market Total:',
-        //   Number(currentMarketTotal.toFixed(2))
-        // );
-        // console.log('Net Gain/Loss:', netGainLoss);
+        const netGainLoss =  currentMarketTotal - userTotalSum;
+console.log(totalShares)
+        console.log('Total Amount Bought:', userTotalSum);
+        console.log(
+          'Current Market Total:',
+          Number(currentMarketTotal.toFixed(2))
+        );
+        console.log('Net Gain/Loss:', netGainLoss);
 
         if (netgainBool) {
           return netGainLoss;
@@ -89,20 +89,14 @@ function fetchDataAndRender() {
             <div class="coin-shares">
               <p>$${
                 coinBalance === null
-                  ? '0'
+                  ? '0.00'
                   : getTotalCoinAmount(coinBalance, false).toFixed(2)
               }</p>
-              <p class="${
+              <p class="net">$${
                 coinBalance === null
-                  ? ''
-                  : getTotalCoinAmount(coinBalance, true) < 0
-                  ? 'negative'
-                  : 'positive'
-              }">$${
-        coinBalance === null
-          ? '0'
-          : getTotalCoinAmount(coinBalance, true).toFixed(2)
-      }</p>
+                  ? '0.00'
+                  : getTotalCoinAmount(coinBalance, true).toFixed(2)
+              }</p>
               </div>
               </div>
               <button class="trade" id="trade">Trade</button>
@@ -132,6 +126,16 @@ function fetchDataAndRender() {
         </section>
       </section>
       `;
+
+
+      const net = document.querySelector(".net")
+        
+      if (net.textContent.includes("-")) {
+        net.classList.add("negative")
+      } else if (net.textContent !== "$0.00") {
+        net.classList.add("positive")
+        
+      }
 
       document.querySelector(
         '.span-header.buy'
