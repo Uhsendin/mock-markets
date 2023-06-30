@@ -4,7 +4,7 @@ body {
 
 h1,
 .balance-title {
-  font-size: 1.3rem;
+  font-size: 1.7rem;
   color: black;
   font-weight: 500;
 }
@@ -212,16 +212,23 @@ color: black;
   background-color: rgb(222, 222, 222);
 }
 
-.coin-market-stats {
-  margin-top: 2rem;
-}
 .coin-market-stats h3 {
   font-size: 2rem;
   font-weight: bold;
+  margin: 2rem 0;
 }
 
 .coin-market-stats p {
   font-size: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
 }
+
+.coin-market-stats span {
+  font-size: inherit;
+}
+
+
 
 

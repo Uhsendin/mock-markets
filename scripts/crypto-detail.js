@@ -29,7 +29,7 @@ function fetchDataAndRender() {
 
 // Formats a given number with an appropriate unit (K, M, B, etc.) based on its value
       function formatNumber(number) {
-        const units = ["", "K", "M", "B", "T"]; // Units for thousands, millions, billions, trillions, etc.
+        const units = ["", "thousand", "million", "billion", "trillion"]; // Units for thousands, millions, billions, trillions, etc.
         let unitIndex = 0;
       
         while (Math.abs(number) >= 1000 && unitIndex < units.length - 1) {
@@ -144,10 +144,10 @@ function fetchDataAndRender() {
         </section>
         <section class="coin-market-stats">
           <h3>Market stats</h3>
-          <p>Popularity ${coinRank}</p>
-          <p>Market cap ${marketCap.toLocaleString()}</p>
-          <p>Volume ${volume.toLocaleString()}</p>
-          <p>Circulating supply ${coinSupply.toLocaleString()}</p>
+          <p><span class="stats-title">Popularity</span>#${coinRank}</p>
+          <p><span class="stats-title">Market cap</span> ${marketCap.toLocaleString()}</p>
+          <p><span class="stats-title">Volume</span> ${volume.toLocaleString()}</p>
+          <p><span class="stats-title">Circulating supply</span> ${coinSupply.toLocaleString()}</p>
         </section>
       </section>
       `;
