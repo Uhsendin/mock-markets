@@ -22,10 +22,28 @@ function fetchDataAndRender() {
       const coinTitle = info.name;
       const coinDes = info.description.en;
       const coinRank = info.market_cap_rank;
-      const marketCap = info.market_data.market_cap.usd;
-      const volume = info.market_data.total_volume.usd;
-      const coinSupply = info.market_data.circulating_supply;
+      const marketCap = formatNumber(info.market_data.market_cap.usd);
+      const volume = formatNumber(info.market_data.total_volume.usd);
+      const coinSupply = formatNumber(info.market_data.circulating_supply);
       const coinBalance = JSON.parse(localStorage.getItem('portfolio'));
+
+// Formats a given number with an appropriate unit (K, M, B, etc.) based on its value
+      function formatNumber(number) {
+        const units = ["", "K", "M", "B", "T"]; // Units for thousands, millions, billions, trillions, etc.
+        let unitIndex = 0;
+      
+        while (Math.abs(number) >= 1000 && unitIndex < units.length - 1) {
+          number /= 1000;
+          unitIndex++;
+        }
+      
+        return number.toFixed(3) + " " + units[unitIndex];
+      }
+      
+     
+      
+      
+      
 
       const getTotalCoinAmount = (coin, netgainBool) => {
         let userTotalSum = 0;
@@ -109,7 +127,7 @@ function fetchDataAndRender() {
               <button class="trade" id="trade">Trade</button>
         </div>
         <section class="about-coin">
-          <p>About ${coinTitle}</p>
+          <h2>About ${coinTitle}</h2>
           <p class="coin-des">${
             coinDes.length === 0
               ? `We regret the absence of a description for ${
@@ -125,7 +143,7 @@ function fetchDataAndRender() {
          
         </section>
         <section class="coin-market-stats">
-          <h2>Market stats</h2>
+          <h3>Market stats</h3>
           <p>Popularity ${coinRank}</p>
           <p>Market cap ${marketCap.toLocaleString()}</p>
           <p>Volume ${volume.toLocaleString()}</p>

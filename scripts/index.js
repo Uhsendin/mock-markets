@@ -5,18 +5,18 @@ class Coin {
     this.img = img;
     this.price = price;
     this.price24High = price24High;
-    this.id = id
+    this.id = id;
   }
 
   renderThisCoin() {
-    const coinRender = document.querySelector(".coin-render")
+    const coinRender = document.querySelector('.coin-render');
     coinRender.innerHTML = `
-    <h1>Test<h1>`
+    <h1>Test<h1>`;
   }
 
   render() {
-    const coinElement = document.createElement("section");
-    coinElement.classList.add("coin");
+    const coinElement = document.createElement('section');
+    coinElement.classList.add('coin');
     coinElement.innerHTML = `
     <section class="coin-name">
     <div class="coin-img">
@@ -28,17 +28,20 @@ class Coin {
       <div>
       </section>
       <section class="coin-price">
-      <p class="price">$${this.price.toLocaleString(undefined, {maximumFractionDigits:3, minimumFractionDigits:3})}</p>
+      <p class="price">$${this.price.toLocaleString(undefined, {
+        maximumFractionDigits: 3,
+        minimumFractionDigits: 3,
+      })}</p>
       <p class="price-24-high ${
-        this.price24High >= 0 ? "positive" : "negative"
+        this.price24High >= 0 ? 'positive' : 'negative'
       }"> <i class="fas ${
-        this.price24High >= 0
-          ? "fa-solid fa-arrow-trend-up positive"
-          : "fa-solid fa-arrow-trend-down negative"
-      }"></i>${this.price24High.toFixed(3)}%</p>
+      this.price24High >= 0
+        ? 'fa-solid fa-arrow-trend-up positive'
+        : 'fa-solid fa-arrow-trend-down negative'
+    }"></i>${this.price24High.toFixed(3)}%</p>
       </section>
     `;
-    coinElement.addEventListener("click", () => {
+    coinElement.addEventListener('click', () => {
       window.location.href = `/pages/crypto-details.html?coin=${this.id}`;
     });
     return coinElement;
@@ -48,7 +51,7 @@ class Coin {
 class CoinList {
   constructor() {
     this.coins = [];
-    this.coinsListElement = document.querySelector(".coins-list");
+    this.coinsListElement = document.querySelector('.coins-list');
   }
 
   addCoin(coin) {
@@ -68,7 +71,7 @@ class CoinList {
 const coinList = new CoinList();
 
 window.onload = function () {
-  fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd")
+  fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd')
     .then((res) => res.json())
     .then((data) => {
       for (let i = 0; i < 25; i++) {
@@ -85,8 +88,6 @@ window.onload = function () {
     });
 };
 
-if (!localStorage.getItem("accountBalance")) {
-  localStorage.setItem("accountBalance", 0)
+if (!localStorage.getItem('accountBalance')) {
+  localStorage.setItem('accountBalance', 0);
 }
-
-
