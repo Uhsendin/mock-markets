@@ -30,11 +30,11 @@ class Coin {
         </div>
     </td>
     </div>
-    <td>${this.price}</td>
-    <td>${this.marketCap}</td>
-    <td>${this.curSupply}</td>
-    <td>${this.volume}</td>
-    <td>${this.price24Change}</td>
+    <td class="align">$${formatNumber(this.price)}</td>
+    <td class="align">${formatNumber(this.marketCap)}</td>
+    <td class="align">${formatNumber(this.curSupply)}</td>
+    <td class="align">${formatNumber(this.volume)}</td>
+    <td class="align">${formatNumber(this.price24Change)}</td>
   </tr>
    
   
@@ -62,9 +62,9 @@ class CoinList {
     this.coinsListElement.innerHTML = `
     <thead>
     <tr>
-      <th>#</th>
-      <th>Name</th>
-      <th> Price</th>
+      <th class="align-left">#</th>
+      <th class="align-left">Name</th>
+      <th>Price</th>
       <th>Market Price</th>
       <th>Circulating Supply</th>
       <th>Volume</th>
@@ -106,4 +106,8 @@ window.onload = function () {
 
 if (!localStorage.getItem('accountBalance')) {
   localStorage.setItem('accountBalance', 0);
+}
+
+function formatNumber(number) {
+return number.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
