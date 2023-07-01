@@ -1,11 +1,16 @@
 class Coin {
-  constructor(name, symbol, img, price, price24High, id) {
+  constructor(name, symbol, img, price, price24Change, id, marketCap, rank, volume, curSupply, ath) {
     this.name = name;
     this.symbol = symbol;
     this.img = img;
     this.price = price;
-    this.price24High = price24High;
+    this.price24Change = price24Change;
     this.id = id;
+    this.marketCap = marketCap
+    this.rank = rank
+    this.volume = volume
+    this.curSupply = curSupply
+    this.ath = ath
   }
 
   render() {
@@ -26,7 +31,7 @@ class Coin {
     <td>
       <div>
         <span>${this.price}</span>
-        <span>${this.price24High}</span>
+        <span>${this.price24Change}</span>
       </div>
     </td>
    
@@ -71,7 +76,12 @@ window.onload = function () {
           data[i].image,
           data[i].current_price,
           data[i].price_change_percentage_24h,
-          data[i].id
+          data[i].id,
+          data[i].market_cap,
+          data[i].market_cap_rank,
+          data[i].total_volume,
+          data[i].circulating_supply,
+          data[i].ath
         );
         coinList.addCoin(coin);
       }
