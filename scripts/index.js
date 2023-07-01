@@ -17,23 +17,27 @@ class Coin {
     const coinElement = document.createElement('tr');
     coinElement.classList.add('coin');
     coinElement.innerHTML = `
+    <tr>
+    <td>${this.rank}</td>
     <td>
-      <div>
-        <img src="${this.img}">
-      </div>
+      <div class="wrapper">
+        <div>
+          <img src="${this.img}" alt="${this.name} logo" />
+        </div>
+        <div class="name">
+          <span>${this.name}</span>
+          <span>${this.symbol}</span>
+        </div>
     </td>
-    <td>
-      <div>
-        <span>${this.name}</span>
-        <span>${this.symbol}</span>
-      </div>
-    </td>
-    <td>
-      <div>
-        <span>${this.price}</span>
-        <span>${this.price24Change}</span>
-      </div>
-    </td>
+    </div>
+    <td>${this.price}</td>
+    <td>${this.marketCap}</td>
+    <td>${this.curSupply}</td>
+    <td>${this.volume}</td>
+    <td>${this.price24Change}</td>
+  </tr>
+   
+  
    
     `;
     coinElement.addEventListener('click', () => {
@@ -55,7 +59,19 @@ class CoinList {
   }
 
   render() {
-    this.coinsListElement.innerHTML = `<h2 class="prices">Today's Crypto Prices</h2>`;
+    this.coinsListElement.innerHTML = `
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th> Price</th>
+      <th>Market Price</th>
+      <th>Circulating Supply</th>
+      <th>Volume</th>
+      <th>% 24h</th>
+    </tr>
+  </thead>
+    `;
     for (let i = 0; i < this.coins.length; i++) {
       const coinElement = this.coins[i].render();
       this.coinsListElement.appendChild(coinElement);

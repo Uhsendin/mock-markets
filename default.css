@@ -1,16 +1,16 @@
 /* default css for body and header */
 * {
-    font-size: 62.5%;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    line-height: 1.5;
-    /* color: #ffffff; */
-    color: black;
-    font-family: "Roboto", sans-serif;
-  }
-  body, .hamburger,input,button {
+  font-size: 62.5%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  line-height: 1.5;
+  /* color: #ffffff; */
+  color: black;
+  font-family: "Roboto", sans-serif;
+}
+body, .hamburger,input,button {
     /* background-color: #292c2c; */
     background: #ffffff;
   }

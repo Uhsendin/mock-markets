@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/default.css">
+    <link rel="stylesheet" href="/default.css" />
     <link rel="stylesheet" href="styles/index.css" />
     <script src="scripts/index.js" defer></script>
     <script src="scripts/hamburger.js" defer></script>
@@ -25,11 +25,15 @@
       <div class="overlay"></div>
       <section class="container">
         <h1><a href="index.html">MockMarkets</a></h1>
-        <button class="hamburger"><i class="fa-solid fa-bars hamburger"></i></button>
+        <button class="hamburger">
+          <i class="fa-solid fa-bars hamburger"></i>
+        </button>
       </section>
       <nav>
         <ul>
-          <li><a href="#"><i class="fa-solid fa-magnifying-glass"></i></a></li>
+          <li>
+            <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+          </li>
           <li><a href="/pages/watchlist.html">watchlist</a></li>
           <li><a href="#">trade</a></li>
           <li><a href="/pages/balance.html">balance</a></li>
@@ -39,9 +43,11 @@
       </nav>
     </header>
     <main>
-      <table>
-     <tbody class="coins-list"></tbody>
-      </table>
+      <div class="table-container">
+        <table>
+          <tbody class="coins-list"></tbody>
+        </table>
+      </div>
     </main>
   </body>
 </html>
