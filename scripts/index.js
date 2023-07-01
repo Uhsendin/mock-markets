@@ -1,3 +1,4 @@
+import { formatNumber, formatNumberWithDecimal } from "./utilities.js";
 class Coin {
   constructor(name, symbol, img, price, price24Change, id, marketCap, rank, volume, curSupply, ath) {
     this.name = name;
@@ -30,7 +31,7 @@ class Coin {
         </div>
     </td>
     </div>
-    <td class="align">$${formatNumber(this.price)}</td>
+    <td class="align">$${formatNumberWithDecimal(this.price)}</td>
     <td class="align">${formatNumber(this.marketCap)}</td>
     <td class="align">${formatNumber(this.curSupply)}</td>
     <td class="align">${formatNumber(this.volume)}</td>
@@ -108,6 +109,3 @@ if (!localStorage.getItem('accountBalance')) {
   localStorage.setItem('accountBalance', 0);
 }
 
-function formatNumber(number) {
-return number.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-}

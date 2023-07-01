@@ -27,24 +27,6 @@ function fetchDataAndRender() {
       const coinSupply = formatNumber(info.market_data.circulating_supply);
       const coinBalance = JSON.parse(localStorage.getItem('portfolio'));
 
-// Formats a given number with an appropriate unit (K, M, B, etc.) based on its value
-      function formatNumber(number) {
-        const units = ["", "thousand", "million", "billion", "trillion"]; // Units for thousands, millions, billions, trillions, etc.
-        let unitIndex = 0;
-      
-        while (Math.abs(number) >= 1000 && unitIndex < units.length - 1) {
-          number /= 1000;
-          unitIndex++;
-        }
-      
-        return number.toFixed(3) + " " + units[unitIndex];
-      }
-      
-     
-      
-      
-      
-
       const getTotalCoinAmount = (coin, netgainBool) => {
         let userTotalSum = 0;
         const shareAmount = [];
