@@ -1,5 +1,5 @@
 import { data, config, labels } from './stock-chart.js';
-
+import { formatNumber } from './utilities.js';
 function fetchDataAndRender() {
   // Get coin name from URL parameters
   const urlParams = new URLSearchParams(window.location.search);
