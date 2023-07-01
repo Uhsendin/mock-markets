@@ -8,38 +8,28 @@ class Coin {
     this.id = id;
   }
 
-  renderThisCoin() {
-    const coinRender = document.querySelector('.coin-render');
-    coinRender.innerHTML = `
-    <h1>Test<h1>`;
-  }
-
   render() {
-    const coinElement = document.createElement('section');
+    const coinElement = document.createElement('tr');
     coinElement.classList.add('coin');
     coinElement.innerHTML = `
-    <section class="coin-name">
-    <div class="coin-img">
-    <img src="${this.img}" alt="${this.name}">
-    </div>
-    <div class="coin-info">
-      <h2 class="name">${this.name}</h2>
-      <p class="symbol">${this.symbol}</p>
+    <td>
       <div>
-      </section>
-      <section class="coin-price">
-      <p class="price">$${this.price.toLocaleString(undefined, {
-        maximumFractionDigits: 3,
-        minimumFractionDigits: 3,
-      })}</p>
-      <p class="price-24-high ${
-        this.price24High >= 0 ? 'positive' : 'negative'
-      }"> <i class="fas ${
-      this.price24High >= 0
-        ? 'fa-solid fa-arrow-trend-up positive'
-        : 'fa-solid fa-arrow-trend-down negative'
-    }"></i>${this.price24High.toFixed(3)}%</p>
-      </section>
+        <img src="${this.img}">
+      </div>
+    </td>
+    <td>
+      <div>
+        <span>${this.name}</span>
+        <span>${this.symbol}</span>
+      </div>
+    </td>
+    <td>
+      <div>
+        <span>${this.price}</span>
+        <span>${this.price24High}</span>
+      </div>
+    </td>
+   
     `;
     coinElement.addEventListener('click', () => {
       window.location.href = `/pages/crypto-details.html?coin=${this.id}`;
