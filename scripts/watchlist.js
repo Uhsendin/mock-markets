@@ -1,178 +1,148 @@
-import { data, config } from "./stock-chart.js";
+import { formatNumber, formatNumberWithDecimal } from './utilities.js';
 
-let deleteBtnStatus = false;
-let parsedCryptos = [];
+class Coin {
+  constructor(name, symbol, img, price, price24Change, id, marketCap, rank, volume, curSupply, ath) {
+    this.name = name;
+    this.symbol = symbol;
+    this.img = img;
+    this.price = price;
+    this.price24Change = price24Change;
+    this.id = id;
+    this.marketCap = marketCap;
+    this.rank = rank;
+    this.volume = volume;
+    this.curSupply = curSupply;
+    this.ath = ath;
+  }
 
-const fetchData = async () => {
-  // Retrieve the value of "selectedCryptos" from localStorage
-  const selectedCryptos = localStorage.getItem("selectedCryptos");
-  const watchListContainer = document.querySelector(".watchlist-container");
-  const watchList = [];
-  // Check if the value is null or not a valid JSON string
-  if (selectedCryptos === null) {
-    trashIcon.style.display = "none";
-    const newDiv = document.createElement("div");
-    newDiv.className = "empty-watchlist";
-    newDiv.innerHTML = `
-    <p>Oops looks like your watchlist is empty. Click <a href="/">here</a> to add cryptos to your list!</p>`;
-    document
-      .querySelector(".watchlist")
-      .insertAdjacentElement("beforeend", newDiv);
-  } else {
-    try {
-      // Try to parse the value as JSON
-      let parsedCryptos = JSON.parse(selectedCryptos);
-      // Push Crypto id to array
-      parsedCryptos.forEach((crypto) => {
-        watchList.push(crypto);
-      });
-
-      const coinIds = watchList.map((coin) => coin.id);
-
-      // If there are no coinIds, exit the function without making the fetch request
-      if (coinIds.length === 0) {
-        trashIcon.style.display = "none";
-    const newDiv = document.createElement("div");
-    newDiv.className = "empty-watchlist";
-    newDiv.innerHTML = `
-    <p>Oops looks like your watchlist is empty. Click <a href="/">here</a> to add cryptos to your list!</p>`;
-    document
-      .querySelector(".watchlist")
-      .insertAdjacentElement("beforeend", newDiv);
-        return
-      }
-
-      // Construct the URL for the batch request
-      const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinIds.join(
-        ","
-      )}&localization=false&tickers=false&developer_data=false&sparkline=true`;
-
-      const response = await fetch(url);
-      const coinData = await response.json();
-
-      coinData.forEach((info) => {
-        const coinPriceString = info.current_price.toLocaleString(undefined, {
-          maximumFractionDigits: 3,
-          minimumFractionDigits: 3,
-        });
-        const coin24High = info.price_change_percentage_24h;
-        const sparklineList = info.sparkline_in_7d.price;
-        const sparkLineCurrentDay = sparklineList.slice(-24);
-
-        const coinContainer = document.createElement("section");
-        coinContainer.classList.add("coin");
-        coinContainer.innerHTML = `
-          <div class="coin-info">
-            <div class="coin-img">
-              <img src="${info.image}">
+  render() {
+    const coinElement = document.createElement('tr');
+    coinElement.classList.add('coin');
+    coinElement.innerHTML = `
+      <tr>
+        <td>${this.rank}</td>
+        <td>
+          <div class="wrapper">
+            <div>
+              <img src="${this.img}" alt="${this.name} logo" />
             </div>
-            <div class="coin-name">
-              <h2>${info.name}</h2>
-              <span>${info.symbol}</span>
+            <div class="name">
+              <span>${this.name}</span>
+              <span>${this.symbol}</span>
             </div>
           </div>
-          <div class="canvas-container">
-            <canvas class="stock-chart"></canvas>
-          </div>
-          <div class="coin-prices">
-          <div class="price-container">
-          <span class="current-price">$${coinPriceString}</span>
-          <span class="price-24-high ${
-            coin24High >= 0 ? "positive" : "negative"
-          }">
-            <i class="fas ${
-              coin24High >= 0
-                ? "fa-solid fa-arrow-trend-up positive"
-                : "fa-solid fa-arrow-trend-down negative"
-            }"></i> ${coin24High.toFixed(3)}%
-            </span>
-          </div>
-          <button class="remove" id="remove">
-          <i class="fa-solid fa-circle-minus"></i>
-          </button>
-              
-              </div>
-        `;
+        </td>
+        <td class="align">$${formatNumberWithDecimal(this.price)}</td>
+        <td class="align">${formatNumber(this.marketCap)}</td>
+        <td class="align">${formatNumber(this.curSupply)}</td>
+        <td class="align">${formatNumber(this.volume)}</td>
+        <td class="align">${formatNumber(this.price24Change)}</td>
+      </tr>`;
+    coinElement.addEventListener('click', () => {
+      window.location.href = `/pages/crypto-details.html?coin=${this.id}`;
+    });
+    return coinElement;
+  }
+}
 
-        const removeBtn = coinContainer.querySelector(".remove");
-        removeBtn.addEventListener("click", () => {
-          const coinId = info.id;
+class CoinList {
+  constructor() {
+    this.coins = [];
+    this.coinListElement = document.querySelector('.coins-list');
+  }
 
-          // Remove the coin from the parsedCoins array
-          parsedCryptos = parsedCryptos.filter(
-            (crypto) => crypto.id !== coinId
-          );
+  addcoin(coin) {
+    this.coins.push(coin);
+    this.render();
+  }
 
-          // Remove the coin container from the DOM
-          coinContainer.remove();
+  render() {
+    this.coinListElement.innerHTML = `
+      <thead>
+        <tr>
+          <th class="align-left">#</th>
+          <th class="align-left">Name</th>
+          <th>Price</th>
+          <th>Market Price</th>
+          <th>Circulating Supply</th>
+          <th>Volume</th>
+          <th>% 24h</th>
+        </tr>
+      </thead>
+    `;
 
-          // Save the updated parsedCoins to localStorage
-          localStorage.setItem(
-            "selectedCryptos",
-            JSON.stringify(parsedCryptos)
-          );
-
-          if (parsedCryptos.length === 0) {
-            window.location.reload()
-          }
-        });
-
-        coinContainer.addEventListener("click", () => {
-          if (!deleteBtnStatus) {
-            window.location.href = `/pages/crypto-details.html?coin=${info.id}`;
-          }
-        });
-
-        watchListContainer.appendChild(coinContainer);
-
-        coinContainer.querySelectorAll(".stock-chart").forEach((canvas) => {
-          if (canvas) {
-            data.datasets[0].data = sparkLineCurrentDay;
-            data.datasets[0].borderColor = coin24High < 0 ? "red" : "green";
-
-            const ctx = canvas.getContext("2d");
-            const existingChart = Chart.getChart(ctx);
-            if (existingChart) {
-              existingChart.destroy();
-            }
-            new Chart(ctx, config);
-          }
-        });
-      });
-    } catch (error) {
-      console.error("Error:", error);
+    for (let i = 0; i < this.coins.length; i++) {
+      const coinElement = this.coins[i].render();
+      this.coinListElement.appendChild(coinElement);
     }
   }
-};
+}
 
-const deleteBtn = document.querySelector(".delete");
-const trashIcon = document.getElementById("trash-icon");
+const tableContainer = document.querySelector('.table-container');
+const trashIcon = document.getElementById('trash-icon');
+const watchList = [];
 
-deleteBtn.addEventListener("click", (_) => {
-  if (!deleteBtnStatus) {
-    deleteBtnStatus = true;
-    trashIcon.style.display = "none";
-    document.querySelector(".delete p").style.display = "block";
-    document.querySelectorAll(".remove").forEach((btn) => {
-      btn.style.display = "block";
-    });
+function emptyList() {
+  trashIcon.style.display = 'none';
+  const newDiv = document.createElement('div');
+  newDiv.className = 'empty-watchlist';
+  newDiv.innerHTML = `
+    <p>Oops looks like your watchlist is empty. Click <a href="/">here</a> to add cryptos to your list!</p>`;
+  tableContainer.insertAdjacentElement('beforeend', newDiv);
+}
 
-    document.querySelectorAll(".canvas-container").forEach((canvas) => {
-      canvas.style.display = "none";
-    });
-  } else {
-    deleteBtnStatus = false;
-    trashIcon.style.display = "inline-block";
-    document.querySelector(".delete p").style.display = "none";
+let parsedCryptos = [];
+let selectedCryptos = localStorage.getItem('selectedCryptos');
 
-    document.querySelectorAll(".remove").forEach((btn) => {
-      btn.style.display = "none";
-    });
+// Check if the value is null or not a valid JSON string
+if (selectedCryptos === null) {
+  emptyList();
+} else {
+  parsedCryptos = JSON.parse(selectedCryptos);
+  parsedCryptos.forEach((crypto) => {
+    watchList.push(crypto);
+  });
+}
 
-    document.querySelectorAll(".canvas-container").forEach((canvas) => {
-      canvas.style.display = "block";
-    });
-  }
-});
+if (watchList.length > 0) {
+  const coinIds = watchList.map((coin) => coin.id);
+  const coinList = new CoinList();
+  
+  window.onload = async function () {
+    const coinsList = [];
+    const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinIds.join(
+      ','
+    )}&localization=true&tickers=true&developer_data=true&sparkline=false`;
+  
+    try {
+      const response = await fetch(url);
+      const coinData = await response.json();
+  
+      coinData.forEach((info) => {
+        const coin = new Coin(
+          info.name,
+          info.symbol,
+          info.image,
+          info.current_price,
+          info.price_change_24h,
+          info.id,
+          info.market_cap,
+          info.market_cap_rank,
+          info.total_volume,
+          info.circulating_supply,
+          info.ath
+        );
+        coinsList.push(coin);
+      });
+  
+      for (let i = 0; i < coinsList.length; i++) {
+        coinList.addcoin(coinsList[i]);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+} else {
+  tableContainer.style.overflowX = 'hidden'
+}
 
-fetchData();
