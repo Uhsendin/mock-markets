@@ -35,85 +35,89 @@
   padding: 0 2rem;
 }
 
-.coin-img,
-.coin-img img {
-  width: 40px;
-  height: 40px;
-}
-.watchlist-container {
-  font-size: 6rem;
+
+img {
+  width: 25px;
+  height: 25px;
+  object-fit: cover;
 }
 
-.coin {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1.5rem;
-  padding: .5rem;
-  border-radius: 5px;
+main {
+  padding: 0 2rem;
+}
+table * {
+  font-size: 1.4rem;
+}
+.table-container {
+  max-width: fit-content;
+  max-height: fit-content;
+  overflow-x: scroll;
 }
 
-.coin:hover{
-  background-color: rgb(222, 222, 222);
-  cursor: pointer;
-}
-.coin span {
-  display: flex;
+table {
+  min-width: max-content;
+  border-collapse: collapse;
 }
 
-.coin-info {
+table th {
+  z-index: 2;
+  text-align: right;
+}
+
+.align {
+  text-align: right;
+}
+
+
+td,
+th {
+  padding: .9rem;
+}
+
+td:first-child,
+th:first-child {
+  background-color: white;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+
+td:nth-child(2),
+th:nth-child(2) {
+  background-color: white;
+  position: sticky;
+  left: 2.5rem;
+  z-index: 1;
+}
+
+th:first-child,
+th:nth-child(2) {
+  z-index: 3;
+  text-align: left;
+}
+
+
+.wrapper {
   display: flex;
   align-items: center;
-  gap: 20px;
-  font-size: 3.6rem;
+  gap: 1rem;
 }
 
-.coin-name h2 {
-  font-weight: 700;
-}
+.wrapper div {
+display: flex;
 
-.coin-name span {
-  text-transform: uppercase;
-  color: rgb(65, 63, 63);
 }
-
-.coin-prices {
+.name {
   display: flex;
-  align-items: center;
-  font-size: 3.6rem;
+  flex-direction: column;
 }
-
-.coin:hover .remove {
-  background-color: #343636;
-}
-
-.remove {
-  display: none;
-  padding-left: 1rem;
+.name span {
   line-height: normal;
 }
 
-.remove:hover {
-  cursor: pointer;
-}
-
-.remove i {
-  font-size: 2.5rem;
-}
-
-.price-24-high,
-.current-price {
-  justify-content: flex-end;
-}
-
-.price-24-high {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
 .positive {
-  color: #16c784;
-  font-weight: 500;
+ color: #16c784;
+ font-weight: 500;
 }
 
 .negative {
@@ -121,13 +125,13 @@
   font-weight: 500;
 }
 
-canvas {
-  width: 60px !important;
+.coin:hover *{
+background-color: rgb(234, 232, 232);
+cursor: pointer;
 }
-
-.canvas-container {
-  display: flex;
-  align-items: center;
+tr:nth-of-type(2n) *
+{
+background-color: rgb(246, 244, 244);
 }
 
 .empty-watchlist {
