@@ -97,6 +97,54 @@ tr:nth-of-type(2n) *
 background-color: rgb(246, 244, 244);
 }
 
+@media (min-width: 688px) {
+  .table-container {
+    overflow-x: visible;
+    margin: auto;
+  }
+  .hamburger {
+    display: none;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 2rem;
+    justify-content: flex-end;
+
+  }
+  nav ul {
+    display: flex;
+  }
+
+  nav a {
+    font-size: 1.6rem;
+  }
+  
+  header {
+    display: flex;
+  }
+
+}
+
+@media (min-width: 1000px) {
+  table *,
+  nav a  {
+    font-size: 1.8rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  table *,
+  nav a {
+    font-size: 2.2rem;
+  }
+  nav a {
+    padding: 3rem;
+  }
+
+}
+
 
 
 
