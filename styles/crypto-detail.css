@@ -9,6 +9,10 @@ h1,
   font-weight: 500;
 }
 
+.coin-header p {
+  font-size: 1.6rem;
+}
+
 .balance-title {
   margin-bottom: -5px;
 }
@@ -175,8 +179,20 @@ color: black;
   display: flex;
   justify-content: center;
   flex-direction: column;
+  align-items: center;
   height: 100%;
   gap: 2rem;
+  
+}
+
+.anchors a {
+  display: flex;
+  justify-content: center;
+  background-color: rgba(0, 62, 193, 0.03);
+  max-width: 44rem;
+  border: solid 1px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.3);
+
 }
 
 .buy-coin,
@@ -228,6 +244,79 @@ color: black;
 .coin-market-stats span {
   font-size: inherit;
 }
+
+@media (min-width: 550px) {
+  main {
+    max-width: 56rem;
+    margin: auto;
+  }
+}
+
+@media (min-width: 688px) {
+  .hamburger {
+    display: none;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 2rem;
+    justify-content: flex-end;
+
+  }
+  nav ul {
+    display: flex;
+  }
+
+  nav a {
+    font-size: 1.6rem;
+  }
+  
+  header {
+    display: flex;
+  }
+  main {
+    max-width: 100% !important;
+    margin: 0;
+  }
+  .coin-details {
+    display: flex;
+    gap: 2rem;
+    background-color: rgba(0, 62, 193, 0.03);
+    padding: 2rem;
+
+  }
+
+  .top,
+  .bottom {
+    padding: 4rem;
+    border-radius: 15px;
+    width: 50%;
+    background-color: rgb(255, 255, 255);
+    border: solid 1px rgba(0, 0, 0, 0.3);
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@media (min-width: 1000px) {
+  table *,
+  nav a  {
+    font-size: 1.8rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  table *,
+  nav a {
+    font-size: 2.2rem;
+  }
+  nav a {
+    padding: 3rem;
+  }
+
+}
+
+
 
 
 

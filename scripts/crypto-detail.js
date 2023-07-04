@@ -1,5 +1,8 @@
 import { data, config, labels } from './stock-chart.js';
 import { formatNumber } from './utilities.js';
+
+let myChart;
+
 function fetchDataAndRender() {
   // Get coin name from URL parameters
   const urlParams = new URLSearchParams(window.location.search);
@@ -60,6 +63,7 @@ function fetchDataAndRender() {
       };
 
       coinDetailsElement.innerHTML = `
+      <div class="top">
       <h1>${info.name} Price</h1>
       <section class="coin-header">
         <div class="coin-current">
@@ -73,14 +77,14 @@ function fetchDataAndRender() {
       <section class="coin-graph">
       <canvas class="canvas-graph"></canvas>
       </section>
-      <section class="coin-info">
+    
         <div class="your-balance">
           <p class="balance-title">Your balance</p>
           <p class="balance">$${Number(
             localStorage.getItem('accountBalance')
           ).toLocaleString()}</p>
           <div class="coin-balance">
-            <div class="coin-primary-balance">
+          <div class="coin-primary-balance">
               <img src="${coinImg}" alt="${coinTitle}">
               <div class="coin-text">
                 <h2>${coinTitle}</h2>
@@ -88,8 +92,8 @@ function fetchDataAndRender() {
               </div>
             </div>
             <div class="coin-shares">
-              <p>$${
-                coinBalance === null
+            <p>$${
+              coinBalance === null
                   ? '0.00'
                   : getTotalCoinAmount(coinBalance, false).toLocaleString(
                       undefined,
@@ -106,8 +110,11 @@ function fetchDataAndRender() {
               }</p>
               </div>
               </div>
+              </div>
+              </div>
+              <div class="bottom"
+              <div class="btn-trade">
               <button class="trade" id="trade">Trade</button>
-        </div>
         <section class="about-coin">
           <h2>About ${coinTitle}</h2>
           <p class="coin-des">${
@@ -115,8 +122,8 @@ function fetchDataAndRender() {
               ? `We regret the absence of a description for ${
                   coinName.charAt(0).toUpperCase() + coinName.slice(1)
                 }. In the meantime, you can examine its market capitalization, trading volume, and historical price data to gauge its significance within the crypto ecosystem.`
-              : coinDes
-          }</p>
+                : coinDes
+              }</p>
           ${
             coinDes.length !== 0
               ? ` <button class="view-more">View more</button>`
@@ -131,7 +138,8 @@ function fetchDataAndRender() {
           <p><span class="stats-title">Volume</span> ${volume.toLocaleString()}</p>
           <p><span class="stats-title">Circulating supply</span> ${coinSupply.toLocaleString()}</p>
         </section>
-      </section>
+        </div>
+      
       `;
 
       const net = document.querySelector('.net');
@@ -180,7 +188,6 @@ function fetchDataAndRender() {
 
       const cryptoGraph = () => {
         const canvas = document.querySelector('.canvas-graph');
-        console.log();
         if (canvas) {
           data.labels = labels;
           data.datasets[0].data = sparkLineCurrentDay;
@@ -190,10 +197,15 @@ function fetchDataAndRender() {
           config.options.plugins.tooltip.mode = 'index';
           config.options.plugins.tooltip.intersect = false;
           const ctx = canvas.getContext('2d');
-          new Chart(ctx, config);
+          if (myChart) {
+            myChart.destroy();
+          }
+          myChart = new Chart(ctx, config);
         }
       };
       cryptoGraph();
+
+      window.addEventListener('resize', cryptoGraph)
 
       const openModalBtn = document.getElementById('trade');
       const modal = document.getElementById('modal');
