@@ -9,11 +9,9 @@
   justify-content: space-between;
 }
 
-
-
 .header i {
   font-size: 2rem;
-  color: black
+  color: black;
 }
 
 .delete p {
@@ -34,7 +32,6 @@
 .header {
   padding: 0 2rem;
 }
-
 
 img {
   width: 25px;
@@ -68,10 +65,9 @@ table th {
   text-align: right;
 }
 
-
 td,
 th {
-  padding: .9rem;
+  padding: 0.9rem;
 }
 
 td:first-child,
@@ -96,7 +92,6 @@ th:nth-child(2) {
   text-align: left;
 }
 
-
 .wrapper {
   display: flex;
   align-items: center;
@@ -104,8 +99,7 @@ th:nth-child(2) {
 }
 
 .wrapper div {
-display: flex;
-
+  display: flex;
 }
 .name {
   display: flex;
@@ -116,8 +110,8 @@ display: flex;
 }
 
 .positive {
- color: #16c784;
- font-weight: 500;
+  color: #16c784;
+  font-weight: 500;
 }
 
 .negative {
@@ -125,13 +119,12 @@ display: flex;
   font-weight: 500;
 }
 
-.coin:hover *{
-background-color: rgb(234, 232, 232);
-cursor: pointer;
+.coin:hover * {
+  background-color: rgb(234, 232, 232);
+  cursor: pointer;
 }
-tr:nth-of-type(2n) *
-{
-background-color: rgb(246, 244, 244);
+tr:nth-of-type(2n) * {
+  background-color: rgb(246, 244, 244);
 }
 
 .empty-watchlist {
@@ -144,4 +137,49 @@ background-color: rgb(246, 244, 244);
   font-size: inherit;
   text-decoration: none;
   color: rgb(56, 97, 251);
+}
+
+@media (min-width: 688px) {
+  .table-container {
+    overflow-x: visible;
+    margin: auto;
+  }
+  .hamburger {
+    display: none;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 2rem;
+    justify-content: flex-end;
+  }
+  nav ul {
+    display: flex;
+  }
+
+  nav a {
+    font-size: 1.6rem;
+  }
+
+  header {
+    display: flex;
+  }
+}
+
+@media (min-width: 1000px) {
+  table *,
+  nav a {
+    font-size: 1.8rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  table *,
+  nav a {
+    font-size: 2.2rem;
+  }
+  nav a {
+    padding: 3rem;
+  }
 }
