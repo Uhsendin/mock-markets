@@ -83,7 +83,10 @@ class CoinList {
   }
 
   render() {
-    this.coinListElement.innerHTML = `
+    this.coinListElement.innerHTML = '';
+
+    if (this.coins.length > 0) {
+      this.coinListElement.innerHTML = `
       <thead>
         <tr>
           <th class="align-left">#</th>
@@ -97,9 +100,10 @@ class CoinList {
       </thead>
     `;
 
-    for (let i = 0; i < this.coins.length; i++) {
-      const coinElement = this.coins[i].render(this.useFormattedValues);
-      this.coinListElement.appendChild(coinElement);
+      for (let i = 0; i < this.coins.length; i++) {
+        const coinElement = this.coins[i].render(this.useFormattedValues);
+        this.coinListElement.appendChild(coinElement);
+      }
     }
   }
 }
