@@ -139,6 +139,11 @@ tr:nth-of-type(2n) * {
   color: rgb(56, 97, 251);
 }
 
+.delete-item {
+  display: none;
+  height: 100%;
+}
+
 @media (min-width: 688px) {
   .table-container {
     overflow-x: visible;

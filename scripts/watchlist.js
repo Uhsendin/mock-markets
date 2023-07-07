@@ -1,5 +1,5 @@
 import { formatNumber, formatNumberWithDecimal } from './utilities.js';
-
+let isDeleteshown = false;
 class Coin {
   constructor(
     name,
@@ -33,6 +33,7 @@ class Coin {
   render(useFormattedValues) {
     const coinElement = document.createElement('tr');
     coinElement.classList.add('coin');
+    coinElement.classList.add(`${this.id}`);
     coinElement.innerHTML = `
       <tr>
         <td>${this.rank}</td>
@@ -48,24 +49,30 @@ class Coin {
           </div>
         </td>
         <td class="align">$${formatNumberWithDecimal(this.price)}</td>
-        <td class="align">${useFormattedValues
-        ? formatNumber(this.marketCap)
-        : formatNumberWithDecimal(this.initialMarketCap)
-      }</td>
-        <td class="align">${useFormattedValues
-        ? formatNumber(this.curSupply)
-        : formatNumberWithDecimal(this.initialCurSupply)
-      }</td>
-        <td class="align">${useFormattedValues
-        ? formatNumber(this.volume)
-        : formatNumberWithDecimal(this.initialVolume)
-      }</td>
-        <td class="align ${this.price24Change > 0 ? 'positive' : 'negative'
-      }">${this.price24Change.toFixed(2)}%</td>
+        <td class="align">${
+          useFormattedValues
+            ? formatNumber(this.marketCap)
+            : formatNumberWithDecimal(this.initialMarketCap)
+        }</td>
+        <td class="align">${
+          useFormattedValues
+            ? formatNumber(this.curSupply)
+            : formatNumberWithDecimal(this.initialCurSupply)
+        }</td>
+        <td class="align">${
+          useFormattedValues
+            ? formatNumber(this.volume)
+            : formatNumberWithDecimal(this.initialVolume)
+        }</td>
+        <td class="align ${
+          this.price24Change > 0 ? 'positive' : 'negative'
+        }">${this.price24Change.toFixed(2)}%</td>
+        <td class="align delete-item" id="${this.id}">Delete</td>
+
       </tr>`;
-    coinElement.addEventListener('click', () => {
-      window.location.href = `/pages/crypto-details.html?coin=${this.id}`;
-    });
+    // coinElement.addEventListener('click', () => {
+    // window.location.href = `/pages/crypto-details.html?coin=${this.id}`;
+    // });
     return coinElement;
   }
 }
@@ -96,6 +103,7 @@ class CoinList {
           <th>Circulating Supply</th>
           <th>Volume</th>
           <th>% 24h</th>
+          <th class="delete-item">Remove</th>
         </tr>
       </thead>
     `;
@@ -138,7 +146,7 @@ const coinList = new CoinList();
 
 if (watchList.length > 0) {
   const coinIds = watchList.map((coin) => coin.id);
-  window.onload = async function() {
+  window.onload = async function () {
     const coinsList = [];
     const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinIds.join(
       ',',
@@ -176,12 +184,41 @@ if (watchList.length > 0) {
   tableContainer.style.overflowX = 'hidden';
 }
 
-window.addEventListener('resize', function() {
+window.addEventListener('resize', function () {
   const screenWidth = window.innerWidth;
   const useFormattedValues = screenWidth <= 800;
 
   if (coinList.useFormattedValues !== useFormattedValues) {
     coinList.useFormattedValues = useFormattedValues;
     coinList.render();
+    if (isDeleteshown) {
+      const deleteBtn = document.querySelectorAll('.delete-item');
+      deleteBtn.forEach((item) => (item.style.display = 'table-cell'));
+    }
   }
 });
+
+function removeCoin() {
+  const deleteBtn = document.querySelectorAll('.delete-item');
+  deleteBtn.forEach((item) => {
+    item.style.display = isDeleteshown ? 'none' : 'table-cell';
+    item.addEventListener('click', handleDelete);
+  });
+  isDeleteshown = !isDeleteshown;
+  tableContainer.scrollLeft = tableContainer.scrollWidth;
+}
+
+function handleDelete(e) {
+  const coinId = e.target.id;
+  const list = JSON.parse(localStorage.getItem('selectedCryptos'));
+  const updatedList = list.filter((coin) => coin.id !== coinId);
+  localStorage.setItem('selectedCryptos', JSON.stringify(updatedList));
+  document.querySelector(`.${coinId}`).style.display = 'none';
+
+  if (updatedList.length === 0) {
+    localStorage.removeItem('selectedCryptos');
+    window.location.reload();
+  }
+}
+
+trashIcon.addEventListener('click', removeCoin);
