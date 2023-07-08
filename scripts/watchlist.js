@@ -66,9 +66,12 @@ class Coin {
         <td class="align delete-item" id="${this.id}">Delete</td>
 
       </tr>`;
-    // coinElement.addEventListener('click', () => {
-    // window.location.href = `/pages/crypto-details.html?coin=${this.id}`;
-    // });
+
+    coinElement.addEventListener('click', (e) => {
+      if (!e.target.classList.contains('delete-item')) {
+        window.location.href = `/pages/crypto-details.html?coin=${this.id}`;
+      }
+    });
     return coinElement;
   }
 }

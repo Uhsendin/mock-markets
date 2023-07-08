@@ -141,7 +141,10 @@ tr:nth-of-type(2n) * {
 
 .delete-item {
   display: none;
-  height: 100%;
+}
+
+.align.delete-item {
+  color: #ea3943;
 }
 
 @media (min-width: 688px) {

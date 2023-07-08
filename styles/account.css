@@ -30,6 +30,7 @@ main {
 .column-form input[type='button'] {
   border-radius: 20px;
   background-color: rgb(56, 97, 251);
+  color: white;
   border: none;
   height: 35px;
   font-size: 2rem;
@@ -38,7 +39,7 @@ main {
 
 .column-form input[type='button']:hover,
 .column-form input[type='button']:focus {
-  background-color: rgb(56, 97, 251);
+  background-color: rgb(56, 97, 214);
 }
 
 .column-form input[type='password'],
