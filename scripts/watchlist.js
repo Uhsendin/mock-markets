@@ -49,24 +49,20 @@ class Coin {
           </div>
         </td>
         <td class="align">$${formatNumberWithDecimal(this.price)}</td>
-        <td class="align">${
-          useFormattedValues
-            ? formatNumber(this.marketCap)
-            : formatNumberWithDecimal(this.initialMarketCap)
-        }</td>
-        <td class="align">${
-          useFormattedValues
-            ? formatNumber(this.curSupply)
-            : formatNumberWithDecimal(this.initialCurSupply)
-        }</td>
-        <td class="align">${
-          useFormattedValues
-            ? formatNumber(this.volume)
-            : formatNumberWithDecimal(this.initialVolume)
-        }</td>
-        <td class="align ${
-          this.price24Change > 0 ? 'positive' : 'negative'
-        }">${this.price24Change.toFixed(2)}%</td>
+        <td class="align">${useFormattedValues
+        ? formatNumber(this.marketCap)
+        : formatNumberWithDecimal(this.initialMarketCap)
+      }</td>
+        <td class="align">${useFormattedValues
+        ? formatNumber(this.curSupply)
+        : formatNumberWithDecimal(this.initialCurSupply)
+      }</td>
+        <td class="align">${useFormattedValues
+        ? formatNumber(this.volume)
+        : formatNumberWithDecimal(this.initialVolume)
+      }</td>
+        <td class="align ${this.price24Change > 0 ? 'positive' : 'negative'
+      }">${this.price24Change.toFixed(2)}%</td>
         <td class="align delete-item" id="${this.id}">Delete</td>
 
       </tr>`;
@@ -146,7 +142,7 @@ const coinList = new CoinList();
 
 if (watchList.length > 0) {
   const coinIds = watchList.map((coin) => coin.id);
-  window.onload = async function () {
+  window.onload = async function() {
     const coinsList = [];
     const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinIds.join(
       ',',
@@ -162,7 +158,7 @@ if (watchList.length > 0) {
           info.symbol,
           info.image,
           info.current_price,
-          info.price_change_24h,
+          info.price_change_percentage_24h,
           info.id,
           info.market_cap,
           info.market_cap_rank,
@@ -184,7 +180,7 @@ if (watchList.length > 0) {
   tableContainer.style.overflowX = 'hidden';
 }
 
-window.addEventListener('resize', function () {
+window.addEventListener('resize', function() {
   const screenWidth = window.innerWidth;
   const useFormattedValues = screenWidth <= 800;
 
