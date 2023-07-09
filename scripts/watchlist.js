@@ -44,7 +44,7 @@ class Coin {
             </div>
             <div class="name">
               <span>${this.name}</span>
-              <span>${this.symbol}</span>
+              <span class="symbol">${this.symbol.toUpperCase()}</span>
             </div>
           </div>
         </td>
