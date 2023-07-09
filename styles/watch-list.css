@@ -101,9 +101,16 @@ th:nth-child(2) {
 .wrapper div {
   display: flex;
 }
+
+.symbol {
+  color: rgba(0, 0, 0, 85%);
+}
 .name {
   display: flex;
   flex-direction: column;
+}
+.name span:first-of-type {
+  font-weight: 500;
 }
 .name span {
   line-height: normal;

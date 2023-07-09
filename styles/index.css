@@ -1,4 +1,3 @@
-
 img {
   width: 25px;
   height: 25px;
@@ -31,10 +30,9 @@ table th {
   text-align: right;
 }
 
-
 td,
 th {
-  padding: .9rem;
+  padding: 0.9rem;
 }
 
 td:first-child,
@@ -59,7 +57,6 @@ th:nth-child(2) {
   text-align: left;
 }
 
-
 .wrapper {
   display: flex;
   align-items: center;
@@ -67,20 +64,26 @@ th:nth-child(2) {
 }
 
 .wrapper div {
-display: flex;
+  display: flex;
+}
 
+.symbol {
+  color: rgba(0, 0, 0, 85%);
 }
 .name {
   display: flex;
   flex-direction: column;
+}
+.name span:first-of-type {
+  font-weight: 500;
 }
 .name span {
   line-height: normal;
 }
 
 .positive {
- color: #16c784;
- font-weight: 500;
+  color: #16c784;
+  font-weight: 500;
 }
 
 .negative {
@@ -88,13 +91,12 @@ display: flex;
   font-weight: 500;
 }
 
-.coin:hover *{
-background-color: rgb(234, 232, 232);
-cursor: pointer;
+.coin:hover * {
+  background-color: rgb(234, 232, 232);
+  cursor: pointer;
 }
-tr:nth-of-type(2n) *
-{
-background-color: rgb(246, 244, 244);
+tr:nth-of-type(2n) * {
+  background-color: rgb(246, 244, 244);
 }
 
 @media (min-width: 688px) {
@@ -111,7 +113,6 @@ background-color: rgb(246, 244, 244);
     margin: 0;
     padding: 2rem;
     justify-content: flex-end;
-
   }
   nav ul {
     display: flex;
@@ -120,16 +121,15 @@ background-color: rgb(246, 244, 244);
   nav a {
     font-size: 1.6rem;
   }
-  
+
   header {
     display: flex;
   }
-
 }
 
 @media (min-width: 1000px) {
   table *,
-  nav a  {
+  nav a {
     font-size: 1.8rem;
   }
 }
@@ -142,11 +142,4 @@ background-color: rgb(246, 244, 244);
   nav a {
     padding: 3rem;
   }
-
 }
-
-
-
-
-
-
